@@ -1,10 +1,10 @@
-package com.example.prac5;
+package com.borregos.Practica08;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Prac5ApplicationTests {
+class Practica08ApplicationTests {
 
 	@Test
 	void contextLoads() {

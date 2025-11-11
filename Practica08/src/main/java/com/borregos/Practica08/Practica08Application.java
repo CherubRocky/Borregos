@@ -1,13 +1,13 @@
-package com.example.prac5;
+package com.borregos.Practica08;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Prac5Application {
+public class Practica08Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Prac5Application.class, args);
+		SpringApplication.run(Practica08Application.class, args);
 	}
 
 }
