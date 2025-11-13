@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Espectadores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .table-section {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Gestión de Espectadores</h1>
+            <p>Administra los espectadores de forma fácil y rápida</p>
+        </div>
+
+        <div class="content">
+            <!-- FORMULARIO -->
+            <div class="form-section">
+                <h2>Agregar/Editar Espectador</h2>
+                <form id="espectadorForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="idEspectador">ID del Espectador</label>
+                        <input type="number" id="idEspectador" name="idEspectador" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paterno">Apellido Paterno</label>
+                        <input type="text" id="paterno" name="paterno" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="materno">Apellido Materno</label>
+                        <input type="text" id="materno" name="materno">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                    </div>
+                    <div class="form-group">
+                        <label for="genero">Género</label>
+                        <select id="genero" name="genero">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="horaIngreso">Hora de Ingreso</label>
+                        <input type="time" id="horaIngreso" name="horaIngreso">
+                    </div>
+                    <div class="form-group">
+                        <label for="horaSalida">Hora de Salida</label>
+                        <input type="time" id="horaSalida" name="horaSalida">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- BUSCAR POR ID -->
+            <div class="form-section" style="margin-bottom: 20px;">
+                <h2>Buscar Espectador por ID</h2>
+                <form id="searchForm" onsubmit="handleSearch(event)">
+                    <div class="form-group">
+                        <label for="searchId">ID del Espectador</label>
+                        <input type="number" id="searchId" name="searchId" placeholder="Ingrese el ID del espectador" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Buscar</button>
+                        <button type="button" class="btn-primary" onclick="resetSearch()">Mostrar todos</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TABLA -->
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Género</th>
+                            <th>Hora de Ingreso</th>
+                            <th>Hora de Salida</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="espectadorTableBody">
+                        <!-- Aquí se llenarán los registros -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api/espectadores';
+
+        document.addEventListener('DOMContentLoaded', loadEspectadores);
+
+        async function loadEspectadores() {
+            const response = await fetch(API_URL);
+            const espectadores = await response.json();
+            renderTable(espectadores);
+        }
+
+        function renderTable(espectadores) {
+            const tableBody = document.getElementById('espectadorTableBody');
+            tableBody.innerHTML = espectadores.map(espectador => `
+                <tr>
+                    <td>${espectador.idEspectador}</td>
+                    <td>${espectador.nombre}</td>
+                    <td>${espectador.paterno}</td>
+                    <td>${espectador.materno || ''}</td>
+                    <td>${espectador.fechaNacimiento || ''}</td>
+                    <td>${espectador.genero}</td>
+                    <td>${espectador.horaIngreso || ''}</td>
+                    <td>${espectador.horaSalida || ''}</td>
+                    <td>
+                        <button onclick="editEspectador(${espectador.idEspectador})">Editar</button>
+                        <button onclick="deleteEspectador(${espectador.idEspectador})">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const espectador = Object.fromEntries(formData.entries());
+
+            const method = espectador.idEspectador ? 'PUT' : 'POST';
+            const url = espectador.idEspectador ? `${API_URL}/${espectador.idEspectador}` : API_URL;
+
+            await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(espectador)
+            });
+
+            form.reset();
+            loadEspectadores();
+        }
+
+        async function editEspectador(id) {
+            const response = await fetch(`${API_URL}/${id}`);
+            const espectador = await response.json();
+            const form = document.getElementById('espectadorForm');
+
+            Object.keys(espectador).forEach(key => {
+                const input = form.querySelector(`[name="${key}"]`);
+                if (input) input.value = espectador[key];
+            });
+
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteEspectador(id) {
+            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            loadEspectadores();
+        }
+
+        async function handleSearch(event) {
+            event.preventDefault();
+            const searchId = document.getElementById('searchId').value;
+
+            try {
+                const response = await fetch(`${API_URL}/${searchId}`);
+
+                if (!response.ok) {
+                    throw new Error('Espectador no encontrado');
+                }
+
+                const espectador = await response.json();
+                renderTable([espectador]);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        function resetSearch() {
+            document.getElementById('searchForm').reset();
+            loadEspectadores();
+        }
+    </script>
+</body>
+</html>
