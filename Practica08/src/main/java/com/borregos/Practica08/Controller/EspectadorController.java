@@ -18,7 +18,12 @@ import java.util.Optional;
 public class EspectadorController {
     
     private final EspectadorService espectadorService;
-    
+
+    /**
+     * Constructor principal que inyecta el servicio de {@link Espectador}.
+     *
+     * @param espectadorService Servicio que maneja la lógica de negocio relacionada con los espectadores.
+     */
     public EspectadorController(EspectadorService espectadorService) {
         this.espectadorService = espectadorService;
     }
@@ -56,8 +61,18 @@ public class EspectadorController {
     }
     
     /**
-     * POST /api/espectadores
-     * Crear un nuevo espectador
+     * Crea un nuevo espectador en la base de datos.
+     * <p>
+     * Endpoint: <b>POST /api/espectadores</b>
+     * </p>
+     *
+     * @param espectador Objeto {@link Espectador} con los datos a registrar.
+     * @return Una respuesta con:
+     *         <ul>
+     *             <li>201 (Created) y el espectador creado.</li>
+     *             <li>400 (Bad Request) si hay errores de validación.</li>
+     *             <li>500 (Internal Server Error) si ocurre un error en el servidor.</li>
+     *         </ul>
      */
     @PostMapping
     public ResponseEntity<?> createEspectador(@RequestBody Espectador espectador) {
@@ -72,9 +87,21 @@ public class EspectadorController {
         }
     }
     
-    /**
-     * PUT /api/espectadores/{id}
-     * Actualizar un espectador existente
+   /**
+     * Actualiza los datos de un espectador existente.
+     * <p>
+     * Endpoint: <b>PUT /api/espectadores/{id}</b>
+     * </p>
+     *
+     * @param id Identificador del espectador a actualizar.
+     * @param espectador Objeto {@link Espectador} con los nuevos datos.
+     * @return Una respuesta con:
+     *         <ul>
+     *             <li>200 (OK) y el espectador actualizado.</li>
+     *             <li>400 (Bad Request) si los datos son inválidos.</li>
+     *             <li>404 (Not Found) si el espectador no existe.</li>
+     *             <li>500 (Internal Server Error) si ocurre un error inesperado.</li>
+     *         </ul>
      */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEspectador(@PathVariable Long id, 
@@ -93,9 +120,19 @@ public class EspectadorController {
         }
     }
     
-    /**
-     * DELETE /api/espectadores/{id}
-     * Eliminar un espectador
+     /**
+     * Elimina un espectador de la base de datos por su identificador.
+     * <p>
+     * Endpoint: <b>DELETE /api/espectadores/{id}</b>
+     * </p>
+     *
+     * @param id Identificador único del espectador a eliminar.
+     * @return Una respuesta con:
+     *         <ul>
+     *             <li>200 (OK) si el espectador se eliminó correctamente.</li>
+     *             <li>404 (Not Found) si el espectador no existe.</li>
+     *             <li>500 (Internal Server Error) si ocurre un error en el servidor.</li>
+     *         </ul>
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEspectador(@PathVariable Long id) {
@@ -111,9 +148,17 @@ public class EspectadorController {
         }
     }
     
-    /**
-     * GET /api/espectadores/count
-     * Obtener cantidad total de espectadores
+     /**
+     * Obtiene la cantidad total de espectadores registrados en el sistema.
+     * <p>
+     * Endpoint: <b>GET /api/espectadores/count</b>
+     * </p>
+     *
+     * @return Una respuesta con:
+     *         <ul>
+     *             <li>200 (OK) y el número total de espectadores.</li>
+     *             <li>500 (Internal Server Error) si ocurre un error inesperado.</li>
+     *         </ul>
      */
     @GetMapping("/count")
     public ResponseEntity<Integer> countEspectadores() {
