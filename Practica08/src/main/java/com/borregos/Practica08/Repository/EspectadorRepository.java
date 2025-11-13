@@ -1,7 +1,6 @@
-package com.borregos.Practica08.repository;
+package com.borregos.Practica08.Repository;
 
-import com.borregos.Practica08.mapper.EspectadorRowMapper;
-import com.borregos.Practica08.model.Espectador;
+import com.borregos.Practica08.Model.Espectador;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package com.borregos.Practica08.controller;
+package com.borregos.Practica08.Controller;
 
-import com.borregos.Practica08.model.Espectador;
-import com.borregos.Practica08.service.EspectadorService;
+import com.borregos.Practica08.Model.Espectador;
+import com.borregos.Practica08.Service.EspectadorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package com.borregos.Practica08.mapper;
+package com.borregos.Practica08.Repository;
 
-import com.borregos.Practica08.model.Espectador;
+import com.borregos.Practica08.Model.Espectador;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

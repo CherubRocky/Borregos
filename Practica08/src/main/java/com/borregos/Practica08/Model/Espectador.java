@@ -1,4 +1,4 @@
-package com.borregos.Practica08.model;
+package com.borregos.Practica08.Model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

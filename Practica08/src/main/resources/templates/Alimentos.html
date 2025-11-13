@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Alimentos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            grid-column: 1 / -1;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .table-section {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Alimentos</h1>
+            <p>Administra los Alimentos</p>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <h2>Agregar/Editar Alimento</h2>
+                <form id="alimentoForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <div>
+                            <label for="idAlimento">ID (requerido para crear)</label>
+                            <input type="number" id="idAlimento" name="idAlimento" min="1" placeholder="Ej. 1001">
+                        </div>
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div>
+                            <label for="fechaCaducidad">Fecha de Caducidad</label>
+                            <input type="date" id="fechaCaducidad" name="fechaCaducidad">
+                        </div>
+                        <div>
+                            <label for="perecedero">Perecedero</label>
+                            <input type="checkbox" id="perecedero" name="perecedero">
+                        </div>
+                        <div>
+                            <label for="precioSinIVA">Precio sin IVA</label>
+                            <input type="number" id="precioSinIVA" name="precioSinIVA" step="0.01" required>
+                        </div>
+                    </div>
+                    <input type="hidden" id="currentId">
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Guardar</button>
+                        <button type="button" class="btn-danger" onclick="resetForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-section" style="margin-top: 10px;">
+                <h2>Buscar Alimento por ID</h2>
+                <div class="form-group" style="align-items: end;">
+                    <div>
+                        <label for="searchId">ID</label>
+                        <input type="number" id="searchId" min="1" placeholder="Ej. 1001">
+                    </div>
+                    <div class="button-group" style="margin-top:0;">
+                        <button type="button" class="btn-primary" onclick="searchById()">Buscar</button>
+                        <button type="button" class="btn-primary" onclick="loadAlimentos()">Mostrar todos</button>
+                        <button type="button" class="btn-danger" onclick="clearSearch()">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Fecha de Caducidad</th>
+                            <th>Perecedero</th>
+                            <th>Precio sin IVA</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alimentoTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api/alimentos';
+        document.addEventListener('DOMContentLoaded', loadAlimentos);
+
+        async function loadAlimentos() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(await response.text());
+                const alimentos = await response.json();
+                renderTable(alimentos);
+            } catch (err) {
+                alert('Error al cargar alimentos: ' + err.message);
+            }
+        }
+
+        function renderTable(alimentos) {
+            const tableBody = document.getElementById('alimentoTableBody');
+            tableBody.innerHTML = alimentos.map(alimento => `
+                <tr>
+                    <td>${alimento.idAlimento}</td>
+                    <td>${alimento.nombre}</td>
+                    <td>${alimento.fechaCaducidad || 'N/A'}</td>
+                    <td>${alimento.perecedero ? 'Sí' : 'No'}</td>
+                    <td>${alimento.precioSinIVA}</td>
+                    <td class="actions">
+                        <button class="btn-primary" onclick="editAlimento(${alimento.idAlimento})">Editar</button>
+                        <button class="btn-danger" onclick="deleteAlimento(${alimento.idAlimento})">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const idInput = document.getElementById('idAlimento');
+            const currentId = document.getElementById('currentId').value;
+
+            const payload = {
+                idAlimento: idInput.value ? Number(idInput.value) : undefined,
+                nombre: document.getElementById('nombre').value.trim(),
+                fechaCaducidad: document.getElementById('fechaCaducidad').value || null,
+                perecedero: document.getElementById('perecedero').checked,
+                precioSinIVA: document.getElementById('precioSinIVA').value ? Number(document.getElementById('precioSinIVA').value) : null
+            };
+
+            if (!payload.nombre) { alert('El nombre es obligatorio'); return; }
+            if (payload.precioSinIVA == null || payload.precioSinIVA <= 0) { alert('Precio sin IVA debe ser > 0'); return; }
+
+            const isEdit = !!currentId;
+            const url = isEdit ? `${API_URL}/${currentId}` : API_URL;
+            const method = isEdit ? 'PUT' : 'POST';
+
+            if (!isEdit && !payload.idAlimento) { alert('Para crear debes poner el ID'); return; }
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error(await res.text());
+                resetForm();
+                await loadAlimentos();
+            } catch (err) {
+                alert('Error al guardar: ' + err.message);
+            }
+        }
+
+        async function editAlimento(id) {
+            try {
+                const response = await fetch(`${API_URL}/${id}`);
+                if (!response.ok) throw new Error(await response.text());
+                const alimento = await response.json();
+                document.getElementById('nombre').value = alimento.nombre || '';
+                document.getElementById('fechaCaducidad').value = alimento.fechaCaducidad || '';
+                document.getElementById('perecedero').checked = !!alimento.perecedero;
+                document.getElementById('precioSinIVA').value = alimento.precioSinIVA;
+
+                document.getElementById('idAlimento').value = alimento.idAlimento;
+                document.getElementById('idAlimento').disabled = true;
+                document.getElementById('currentId').value = alimento.idAlimento;
+            } catch (err) {
+                alert('Error al cargar alimento: ' + err.message);
+            }
+        }
+
+        async function deleteAlimento(id) {
+            if (!confirm(`¿Eliminar alimento ${id}?`)) return;
+            try {
+                const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error(await res.text());
+                await loadAlimentos();
+                if (document.getElementById('currentId').value == id) resetForm();
+            } catch (err) {
+                alert('Error al eliminar: ' + err.message);
+            }
+        }
+
+        function resetForm() {
+            const form = document.getElementById('alimentoForm');
+            form.reset();
+            document.getElementById('currentId').value = '';
+            const idInput = document.getElementById('idAlimento');
+            idInput.disabled = false;
+        }
+
+        async function searchById() {
+            const id = document.getElementById('searchId').value;
+            if (!id) { alert('Introduce un ID para buscar'); return; }
+            try {
+                const res = await fetch(`${API_URL}/${id}`);
+                if (res.status === 404) {
+                    renderTable([]);
+                    alert('No encontrado');
+                    return;
+                }
+                if (!res.ok) throw new Error(await res.text());
+                const alimento = await res.json();
+                renderTable([alimento]);
+            } catch (err) {
+                alert('Error en la búsqueda: ' + err.message);
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchId').value = '';
+            loadAlimentos();
+        }
+    </script>
+</body>
+</html>

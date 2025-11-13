@@ -1,7 +1,7 @@
-package com.borregos.Practica08.service;
+package com.borregos.Practica08.Service;
 
-import com.borregos.Practica08.model.Espectador;
-import com.borregos.Practica08.repository.EspectadorRepository;
+import com.borregos.Practica08.Model.Espectador;
+import com.borregos.Practica08.Repository.EspectadorRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
