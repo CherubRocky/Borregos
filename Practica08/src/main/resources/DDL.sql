@@ -210,9 +210,13 @@ COMMENT ON COLUMN Alimento.PrecioSinIVA IS
 COMMENT ON CONSTRAINT alimento_d1 ON Alimento IS
 'CHECK: asegura que Nombre <> '''' (no permite cadena vacía).';
 
+-- COMMENT ON CONSTRAINT alimento_d6 ON Alimento IS
+-- 'CHECK: si Perecedero = TRUE entonces FechaCaducidad > CURRENT_DATE; '
+-- 'permite Perecedero = FALSE sin fecha; además evita Perecedero NULL por lógica de la condición.';
+
 COMMENT ON CONSTRAINT alimento_d6 ON Alimento IS
-'CHECK: si Perecedero = TRUE entonces FechaCaducidad > CURRENT_DATE; '
-'permite Perecedero = FALSE sin fecha; además evita Perecedero NULL por lógica de la condición.';
+'CHECK: si Perecedero = TRUE entonces FechaCaducidad > CURRENT_DATE. Permite Perecedero = FALSE sin fecha. Además evita Perecedero NULL por lógica de la condición.';
+
 
 COMMENT ON CONSTRAINT alimento_d3 ON Alimento IS
 'CHECK: PrecioSinIVA debe ser estrictamente mayor que 0 (MONEY).';
