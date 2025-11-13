@@ -14,29 +14,45 @@ import java.util.Optional;
  */
 @Service
 public class EspectadorService {
-    
+
+    /** Repositorio encargado de las operaciones con la base de datos */
     private final EspectadorRepository espectadorRepository;
-    
+
+    /**
+     * Constructor que inyecta el repositorio de espectadores.
+     *
+     * @param espectadorRepository instancia del repositorio {@link EspectadorRepository}.
+     */
     public EspectadorService(EspectadorRepository espectadorRepository) {
         this.espectadorRepository = espectadorRepository;
     }
     
     /**
-     * Obtener todos los espectadores
+     * Obtiene todos los espectadores almacenados en la base de datos.
+     *
+     * @return una lista de objetos {@link Espectador}.
      */
     public List<Espectador> getAllEspectadores() {
         return espectadorRepository.findAll();
     }
     
-    /**
-     * Buscar espectador por ID
+     /**
+     * Busca un espectador por su identificador único.
+     *
+     * @param id identificador del espectador a buscar.
+     * @return un {@link Optional} con el espectador si existe, o vacío si no se encuentra.
      */
     public Optional<Espectador> getEspectadorById(Long id) {
         return espectadorRepository.findById(id);
     }
     
     /**
-     * Crear un nuevo espectador con validaciones
+     * Crea un nuevo espectador en la base de datos después de validar sus datos.
+     *
+     * @param espectador objeto {@link Espectador} a crear.
+     * @return el espectador creado.
+     * @throws IllegalArgumentException si los datos del espectador no son válidos.
+     * @throws RuntimeException si ocurre un error al guardar en la base de datos.
      */
     public Espectador createEspectador(Espectador espectador) {
         // Validaciones de negocio
@@ -50,16 +66,20 @@ public class EspectadorService {
     }
     
     /**
-     * Actualizar un espectador existente
+     * Actualiza los datos de un espectador existente.
+     *
+     * @param id identificador del espectador a actualizar.
+     * @param espectador objeto {@link Espectador} con los nuevos datos.
+     * @return el espectador actualizado.
+     * @throws RuntimeException si el espectador no existe o no puede actualizarse.
      */
     public Espectador updateEspectador(Long id, Espectador espectador) {
-        // Verificar que existe
+        // Verificamos que existe
         Optional<Espectador> existente = espectadorRepository.findById(id);
         if (existente.isEmpty()) {
             throw new RuntimeException("Espectador no encontrado con ID: " + id);
         }
         
-        // Validaciones de negocio
         validateEspectador(espectador);
         
         int result = espectadorRepository.update(id, espectador);
@@ -71,7 +91,10 @@ public class EspectadorService {
     }
     
     /**
-     * Eliminar un espectador
+     * Elimina un espectador de la base de datos.
+     *
+     * @param id identificador del espectador a eliminar.
+     * @throws RuntimeException si el espectador no existe o no se puede eliminar.
      */
     public void deleteEspectador(Long id) {
         Optional<Espectador> existente = espectadorRepository.findById(id);
@@ -86,14 +109,27 @@ public class EspectadorService {
     }
     
     /**
-     * Obtener cantidad total de espectadores
+     * Obtiene la cantidad total de espectadores registrados.
+     *
+     * @return número total de espectadores en la base de datos.
      */
     public int countEspectadores() {
         return espectadorRepository.count();
     }
     
     /**
-     * Validaciones de negocio para Espectador
+     * <h3>Validaciones de negocio</h3>
+     * Verifica que los datos del espectador cumplan con las reglas del sistema.
+     * <ul>
+     *   <li>El nombre y apellido paterno no pueden estar vacíos.</li>
+     *   <li>La fecha de nacimiento no puede ser futura.</li>
+     *   <li>El género debe ser 'M' o 'F'.</li>
+     *   <li>La hora de ingreso debe estar entre 09:00 y 19:00.</li>
+     *   <li>La hora de salida debe ser posterior a la de ingreso y no exceder las 21:00.</li>
+     * </ul>
+     *
+     * @param espectador objeto {@link Espectador} a validar.
+     * @throws IllegalArgumentException si alguna validación falla.
      */
     private void validateEspectador(Espectador espectador) {
         // Validar nombre no vacío
