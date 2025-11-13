@@ -17,21 +17,32 @@ import java.util.Optional;
 public class EspectadorRepository {
     
     private final JdbcTemplate jdbcTemplate;
-    
+
+     /**
+     * Constructor que inyecta la dependencia de {@link JdbcTemplate}.
+     *
+     * @param jdbcTemplate instancia de {@code JdbcTemplate} proporcionada por Spring.
+     */
     public EspectadorRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    /**
-     * Obtener todos los espectadores
+     /**
+     * Obtiene todos los registros de la tabla {@code Espectador}.
+     *
+     * @return lista con todos los espectadores registrados.
      */
     public List<Espectador> findAll() {
         String sql = "SELECT * FROM Espectador ORDER BY idespectador";
         return jdbcTemplate.query(sql, new EspectadorRowMapper());
     }
     
-    /**
-     * Buscar espectador por ID
+     /**
+     * Busca un espectador por su identificador único.
+     *
+     * @param id identificador del espectador a buscar.
+     * @return un {@link Optional} que contiene el espectador encontrado,
+     * o vacío si no existe un registro con ese ID.
      */
     public Optional<Espectador> findById(Long id) {
         String sql = "SELECT * FROM Espectador WHERE idespectador = ?";
@@ -40,7 +51,10 @@ public class EspectadorRepository {
     }
     
     /**
-     * Crear un nuevo espectador
+     * Inserta un nuevo registro en la tabla {@code Espectador}.
+     *
+     * @param espectador objeto {@link Espectador} que contiene los datos a insertar.
+     * @return número de filas afectadas (1 si la inserción fue exitosa).
      */
     public int save(Espectador espectador) {
         String sql = "INSERT INTO Espectador (idespectador, nombre, paterno, materno, " +
@@ -60,7 +74,11 @@ public class EspectadorRepository {
     }
     
     /**
-     * Actualizar un espectador existente
+     * Actualiza los datos de un espectador existente identificado por su ID.
+     *
+     * @param id identificador del espectador a actualizar.
+     * @param espectador objeto {@link Espectador} con los nuevos valores.
+     * @return número de filas modificadas (1 si la actualización fue exitosa).
      */
     public int update(Long id, Espectador espectador) {
         String sql = "UPDATE Espectador SET nombre = ?, paterno = ?, materno = ?, " +
@@ -80,15 +98,20 @@ public class EspectadorRepository {
     }
     
     /**
-     * Eliminar un espectador por ID
+     * Elimina un registro de la tabla {@code Espectador} según su ID.
+     *
+     * @param id identificador del espectador a eliminar.
+     * @return número de filas eliminadas (1 si la eliminación fue exitosa).
      */
     public int deleteById(Long id) {
         String sql = "DELETE FROM Espectador WHERE idespectador = ?";
         return jdbcTemplate.update(sql, id);
     }
     
-    /**
-     * Contar total de espectadores
+     /**
+     * Obtiene el número total de espectadores registrados en la tabla.
+     *
+     * @return cantidad total de registros en {@code Espectador}.
      */
     public int count() {
         String sql = "SELECT COUNT(*) FROM Espectador";
