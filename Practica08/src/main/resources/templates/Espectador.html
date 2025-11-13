@@ -71,7 +71,7 @@
             font-weight: 500;
         }
 
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -81,7 +81,7 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
@@ -163,72 +163,74 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📋 Gestión de Espectadores</h1>
-            <p>Administra los espectadores de forma fácil y rápida</p>
+            <h1>Espectadores</h1>
+            <p>Administra los Espectadores</p>
         </div>
 
         <div class="content">
-            <!-- FORMULARIO -->
             <div class="form-section">
                 <h2>Agregar/Editar Espectador</h2>
                 <form id="espectadorForm" onsubmit="handleFormSubmit(event)">
                     <div class="form-group">
-                        <label for="idEspectador">ID del Espectador</label>
-                        <input type="number" id="idEspectador" name="idEspectador" required>
+                        <div>
+                            <label for="idEspectador">ID (requerido para crear)</label>
+                            <input type="number" id="idEspectador" name="idEspectador" min="1" placeholder="Ej. 1001">
+                        </div>
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div>
+                            <label for="paterno">Apellido Paterno</label>
+                            <input type="text" id="paterno" name="paterno" required>
+                        </div>
+                        <div>
+                            <label for="materno">Apellido Materno</label>
+                            <input type="text" id="materno" name="materno">
+                        </div>
+                        <div>
+                            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                        </div>
+                        <div>
+                            <label for="genero">Género</label>
+                            <select id="genero" name="genero">
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="horaIngreso">Hora de Ingreso</label>
+                            <input type="time" id="horaIngreso" name="horaIngreso">
+                        </div>
+                        <div>
+                            <label for="horaSalida">Hora de Salida</label>
+                            <input type="time" id="horaSalida" name="horaSalida">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="paterno">Apellido Paterno</label>
-                        <input type="text" id="paterno" name="paterno" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="materno">Apellido Materno</label>
-                        <input type="text" id="materno" name="materno">
-                    </div>
-                    <div class="form-group">
-                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                        <input type="date" id="fechaNacimiento" name="fechaNacimiento">
-                    </div>
-                    <div class="form-group">
-                        <label for="genero">Género</label>
-                        <select id="genero" name="genero">
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="horaIngreso">Hora de Ingreso</label>
-                        <input type="time" id="horaIngreso" name="horaIngreso">
-                    </div>
-                    <div class="form-group">
-                        <label for="horaSalida">Hora de Salida</label>
-                        <input type="time" id="horaSalida" name="horaSalida">
-                    </div>
+                    <input type="hidden" id="currentId">
                     <div class="button-group">
                         <button type="submit" class="btn-primary">Guardar</button>
+                        <button type="button" class="btn-danger" onclick="resetForm()">Cancelar</button>
                     </div>
                 </form>
             </div>
 
-            <!-- BUSCAR POR ID -->
-            <div class="form-section" style="margin-bottom: 20px;">
+            <div class="form-section" style="margin-top: 10px;">
                 <h2>Buscar Espectador por ID</h2>
-                <form id="searchForm" onsubmit="handleSearch(event)">
-                    <div class="form-group">
-                        <label for="searchId">ID del Espectador</label>
-                        <input type="number" id="searchId" name="searchId" placeholder="Ingrese el ID del espectador" required>
+                <div class="form-group" style="align-items: end;">
+                    <div>
+                        <label for="searchId">ID</label>
+                        <input type="number" id="searchId" min="1" placeholder="Ej. 1001">
                     </div>
-                    <div class="button-group">
-                        <button type="submit" class="btn-primary">Buscar</button>
-                        <button type="button" class="btn-primary" onclick="resetSearch()">Mostrar todos</button>
+                    <div class="button-group" style="margin-top:0;">
+                        <button type="button" class="btn-primary" onclick="searchById()">Buscar</button>
+                        <button type="button" class="btn-primary" onclick="loadEspectadores()">Mostrar todos</button>
+                        <button type="button" class="btn-danger" onclick="clearSearch()">Limpiar</button>
                     </div>
-                </form>
+                </div>
             </div>
 
-            <!-- TABLA -->
             <div class="table-section">
                 <table>
                     <thead>
@@ -245,7 +247,6 @@
                         </tr>
                     </thead>
                     <tbody id="espectadorTableBody">
-                        <!-- Aquí se llenarán los registros -->
                     </tbody>
                 </table>
             </div>
@@ -254,13 +255,17 @@
 
     <script>
         const API_URL = '/api/espectadores';
-
         document.addEventListener('DOMContentLoaded', loadEspectadores);
 
         async function loadEspectadores() {
-            const response = await fetch(API_URL);
-            const espectadores = await response.json();
-            renderTable(espectadores);
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error(await response.text());
+                const espectadores = await response.json();
+                renderTable(espectadores);
+            } catch (err) {
+                alert('Error al cargar alimentos: ' + err.message);
+            }
         }
 
         function renderTable(espectadores) {
@@ -275,9 +280,9 @@
                     <td>${espectador.genero}</td>
                     <td>${espectador.horaIngreso || ''}</td>
                     <td>${espectador.horaSalida || ''}</td>
-                    <td>
-                        <button onclick="editEspectador(${espectador.idEspectador})">Editar</button>
-                        <button onclick="deleteEspectador(${espectador.idEspectador})">Eliminar</button>
+                    <td class="actions">
+                        <button class="btn-primary" onclick="editEspectador(${espectador.idEspectador})">Editar</button>
+                        <button class="btn-danger" onclick="deleteEspectador(${espectador.idEspectador})">Eliminar</button>
                     </td>
                 </tr>
             `).join('');
@@ -286,60 +291,103 @@
         async function handleFormSubmit(event) {
             event.preventDefault();
             const form = event.target;
-            const formData = new FormData(form);
-            const espectador = Object.fromEntries(formData.entries());
+            const idInput = document.getElementById('idEspectador');
+            const currentId = document.getElementById('currentId').value;
 
-            const method = espectador.idEspectador ? 'PUT' : 'POST';
-            const url = espectador.idEspectador ? `${API_URL}/${espectador.idEspectador}` : API_URL;
+            const payload = {
+                idEspectador: idInput.value ? Number(idInput.value) : undefined,
+                nombre: document.getElementById('nombre').value.trim(),
+                paterno: document.getElementById('paterno').value.trim(),
+                materno: document.getElementById('materno').value.trim() || null,
+                fechaNacimiento: document.getElementById('fechaNacimiento').value || null,
+                genero: document.getElementById('genero').value,
+                horaIngreso: document.getElementById('horaIngreso').value || null,
+                horaSalida: document.getElementById('horaSalida').value || null
+            };
+            if (!payload.nombre) { alert('El nombre es obligatorio'); return; }
+            if (payload.horaIngreso > payload.horaSalida) { alert('Hora de ingreso debe ser menor o igual a hora de salida'); return; }
 
-            await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(espectador)
-            });
+            const isEdit = !!currentId;
+            const url = isEdit ? `${API_URL}/${currentId}` : API_URL;
+            const method = isEdit ? 'PUT' : 'POST';
 
-            form.reset();
-            loadEspectadores();
-        }
-
-        async function editEspectador(id) {
-            const response = await fetch(`${API_URL}/${id}`);
-            const espectador = await response.json();
-            const form = document.getElementById('espectadorForm');
-
-            Object.keys(espectador).forEach(key => {
-                const input = form.querySelector(`[name="${key}"]`);
-                if (input) input.value = espectador[key];
-            });
-
-            form.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        async function deleteEspectador(id) {
-            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-            loadEspectadores();
-        }
-
-        async function handleSearch(event) {
-            event.preventDefault();
-            const searchId = document.getElementById('searchId').value;
+            if (!isEdit && !payload.idEspectador) { alert('Para crear debes poner el ID'); return; }
 
             try {
-                const response = await fetch(`${API_URL}/${searchId}`);
-
-                if (!response.ok) {
-                    throw new Error('Espectador no encontrado');
-                }
-
-                const espectador = await response.json();
-                renderTable([espectador]);
-            } catch (error) {
-                alert(error.message);
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error(await res.text());
+                resetForm();
+                await loadEspectadores();
+            } catch (err) {
+                alert('Error al guardar: ' + err.message);
             }
         }
 
-        function resetSearch() {
-            document.getElementById('searchForm').reset();
+        async function editEspectador(id) {
+            try {
+                const response = await fetch(`${API_URL}/${id}`);
+                if (!response.ok) throw new Error(await response.text());
+                const espectador = await response.json();
+                document.getElementById('nombre').value = espectador.nombre || '';
+                document.getElementById('paterno').value = espectador.paterno || '';
+                document.getElementById('materno').value = espectador.materno || '';
+                document.getElementById('fechaNacimiento').value = espectador.fechaNacimiento || '';
+                document.getElementById('genero').value = espectador.genero || '';
+                document.getElementById('horaIngreso').value = espectador.horaIngreso || '';
+                document.getElementById('horaSalida').value = espectador.horaSalida || '';
+
+                document.getElementById('idEspectador').value = espectador.idEspectador;
+                document.getElementById('idEspectador').disabled = true;
+                document.getElementById('currentId').value = espectador.idEspectador;
+            } catch (err) {
+                alert('Error al cargar espectador: ' + err.message);
+            }
+        }
+
+        async function deleteEspectador(id) {
+            if (!confirm(`¿Eliminar espectador ${id}?`)) return;
+            try {
+                const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                if (!res.ok) throw new Error(await res.text());
+                await loadEspectadores();
+                if (document.getElementById('currentId').value == id) resetForm();
+            } catch (err) {
+                alert('Error al eliminar: ' + err.message);
+            }
+        }
+
+        function resetForm() {
+            const form = document.getElementById('espectadorForm');
+            form.reset();
+            document.getElementById('currentId').value = '';
+            const idInput = document.getElementById('idEspectador');
+            idInput.disabled = false;
+        }
+
+        async function searchById() {
+            const id = document.getElementById('searchId').value;
+            if (!id) { alert('Introduce un ID para buscar'); return; }
+            try {
+                const res = await fetch(`${API_URL}/${id}`);
+                if (res.status === 404) {
+                    renderTable([]);
+                    alert('No encontrado');
+                    return;
+                }
+                if (!res.ok) throw new Error(await res.text());
+                const espectador = await res.json();
+                renderTable([espectador]);
+            } catch (err) {
+                alert('Error en la búsqueda: ' + err.message);
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchId').value = '';
             loadEspectadores();
         }
     </script>
