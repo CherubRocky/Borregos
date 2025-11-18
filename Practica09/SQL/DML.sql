@@ -363,6 +363,29 @@ insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinI
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (209, 'Strawberries - Fresh', true, '2025-12-07', 1588.19);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (210, 'Mushroom - Portobello', true, '2025-12-09', 927.05);
 
+-- INSERCIONES EDICIONTORENO
+-- (Torneos de tipo Enfrentamiento/Pelea)
+INSERT INTO EdicionTorneo (IdEdicion, NumeroEdicion, FechaEvento, Nota) VALUES
+(1, 1, '2023-03-15', 'Primera edición del torneo Pokemon Go'),
+(2, 2, '2023-07-20', 'Segunda edición - Verano 2023'),
+(3, 3, '2024-01-10', 'Tercera edición - Inicio de año 2024'),
+(4, 4, '2024-06-05', 'Cuarta edición - Mitad de año 2024'),
+(5, 5, '2024-11-15', 'Quinta edición - Fin de año 2024');
+
+-- (Torneos de tipo Captura)
+insert into EdicionTorneo (IdEdicion, NumeroEdicion, FechaEvento, Nota) values (6, 6, CURRENT_DATE, 'La sexta edición del torneo');
+
+-- INSERCIONES EDICIONTORENO (torneos de tipo Enfrentamiento/Pelea)
+INSERT INTO Torneo (IdEdicion, Inicio, Final) VALUES
+(1, '10:00:00', '14:00:00'),  -- IdTorneo = 1
+(2, '09:00:00', '13:00:00'),  -- IdTorneo = 2
+(3, '11:00:00', '15:00:00'),  -- IdTorneo = 3
+(4, '10:30:00', '14:30:00'),  -- IdTorneo = 4
+(5, '09:30:00', '13:30:00');  -- IdTorneo = 5
+
+-- INSERCIONES EDICIONTORENO (torneos de tipo Captura)
+insert into Torneo (IdTorneo, IdEdicion, Inicio, Final) values (101, 6, '09:00:00', '21:00:00');
+
 -- INSERCIONES A PERSONA
     -- Personas que son empleados
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (1, 'Nil', 'MacCosty', 'Lockitt', '1978-04-04', 'M');
@@ -667,7 +690,7 @@ insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (299, 'Allissa', 'Barrett', 'Tewkesbury', '1997-08-12', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (300, 'Alwin', 'Newtown', 'Christy', '1973-06-23', 'M');
 
--- INSERCIONES A Empleado
+-- INSERCIONES A EMPLEADO
 insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior) values (1, 1, 'Waywood', '44723 Southridge Pass', 'Village', 43799, 233, 42);
 insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior) values (2, 2, 'Thompson', '746 Maple Wood Drive', 'Mayer', 21257, 322, 79);
 insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior) values (3, 3, 'Vidon', '9 Sauthoff Way', 'Redwing', 45211, 251, 24);
@@ -819,7 +842,7 @@ insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExter
 insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior) values (149, 149, 'Dennis', '00763 Talisman Alley', 'Merry', 55166, 101, 56);
 insert into Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior) values (150, 150, 'Basil', '150 Westerfield Lane', 'Melrose', 39149, 287, 72);
 
--- INSERCIONES A Cuidador
+-- INSERCIONES A CUIDADOR
 insert into Cuidador (IdPersona, Horario, Localizacion, Salario) values (1, '11:12:28', 'Bom Conselho', 11284);
 insert into Cuidador (IdPersona, Horario, Localizacion, Salario) values (2, '13:17:13', 'Saraktash', 15509);
 insert into Cuidador (IdPersona, Horario, Localizacion, Salario) values (3, '10:30:33', 'Gayny', 16277);
@@ -1204,7 +1227,7 @@ insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) v
 insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('87131', 228, 'FoodieUniverse', 78, 'Topaz Team');
 insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('97733', 229, 'MovieBuff55', 79, 'Gold Team');
 
--- INSERCIONES A Pokemon
+-- INSERCIONES A POKEMON
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (1, '95973', 'Turtwig', 3733, 'Muk', 519.97, 'Hembra', false);
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (2, '91921', 'Electabuzz', 3795, 'Electivire', 739.4, 'Sin género', false);
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (3, '98660', 'Chansey', 2229, 'Scyther', 857.2, 'Macho', true);
@@ -1358,3 +1381,225 @@ insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie,
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (148, '53216', 'Togekiss', 3045, 'Squirtle', 664.06, 'Hembra', false);
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (149, '53216', 'Magikarp', 3187, 'Ditto', 934.1, 'Hembra', false);
 insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (150, '84995', 'Gengar', 1423, 'Umbreon', 823.04, 'Hembra', true);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (156, '22290', 'Pikachu', 500, 'Pikachu', 6.0, 'Macho', false);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (157, '49490', 'Raichu', 800, 'Raichu', 30.0, 'Hembra', true);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (158, '08310', 'Pichu', 300, 'Pichu', 2.0, 'Macho', false);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (159, '73323', 'Alolan Raichu', 900, 'Raichu', 28.5, 'Hembra', true);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (160, '22290', 'Togedemaru', 450, 'Togedemaru', 7.3, 'Macho', false);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (161, '08310', 'Plusle', 600, 'Pikachu', 4.2, 'Hembra', false);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (162, '53724', 'Minun', 580, 'Feraligatr', 4.0, 'Macho', true);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (163, '98341', 'Dedenne', 700, 'Abomasnow', 2.2, 'Hembra', false);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (164, '08310', 'Morpeko', 750, 'Morpeko', 3.0, 'Macho', true);
+insert into pokemon (idpokemon, codigoentrenador, nombre, combatpoints, especie, peso, sexo, shiny) values (165, '98341', 'Pachirisu', 650, 'Pikachu', 3.9, 'Hembra', false);
+
+-- INSERCIONES ENFRENTAMIENTO(marcar estos torneos como de tipo pelea)
+INSERT INTO Enfrentamiento (IdTorneo) VALUES
+(1),
+(2),
+(3),
+(4),
+(5);
+
+-- 4. INSERCIONES PELEA(peleas dentro de cada torneo)
+-- Edición 1 (IdTorneo = 1)
+INSERT INTO Pelea (IdPelea, IdParticipante, IdTorneo) VALUES
+(1, 151, 1),
+(2, 152, 1),
+(3, 153, 1),
+(4, 154, 1),
+(5, 155, 1),
+(6, 156, 1),
+(7, 157, 1),
+(8, 158, 1),
+(9, 159, 1),
+(10, 160, 1);
+
+-- Edición 2 (IdTorneo = 2) 
+INSERT INTO Pelea (IdPelea, IdParticipante, IdTorneo) VALUES
+(11, 161, 2),
+(12, 162, 2),
+(13, 163, 2),
+(14, 164, 2),
+(15, 165, 2),
+(16, 166, 2),
+(17, 167, 2),
+(18, 168, 2),
+(19, 169, 2),
+(20, 170, 2);
+
+-- Edición 3 (IdTorneo = 3) 
+INSERT INTO Pelea (IdPelea, IdParticipante, IdTorneo) VALUES
+(21, 171, 3),
+(22, 172, 3),
+(23, 173, 3),
+(24, 174, 3),
+(25, 175, 3),
+(26, 176, 3),
+(27, 177, 3),
+(28, 178, 3),
+(29, 179, 3),
+(30, 180, 3);
+
+-- Edición 4 (IdTorneo = 4) 
+INSERT INTO Pelea (IdPelea, IdParticipante, IdTorneo) VALUES
+(31, 181, 4),
+(32, 182, 4),
+(33, 183, 4),
+(34, 184, 4),
+(35, 185, 4),
+(36, 186, 4),
+(37, 187, 4),
+(38, 188, 4),
+(39, 189, 4),
+(40, 190, 4);
+
+-- Edición 5 (IdTorneo = 5)
+INSERT INTO Pelea (IdPelea, IdParticipante, IdTorneo) VALUES
+(41, 191, 5),
+(42, 192, 5),
+(43, 193, 5),
+(44, 194, 5),
+(45, 195, 5),
+(46, 196, 5),
+(47, 197, 5),
+(48, 198, 5),
+(49, 199, 5),
+(50, 200, 5),
+(51, 201, 5),
+(52, 202, 5),
+(53, 203, 5),
+(54, 204, 5),
+(55, 205, 5),
+(56, 206, 5),
+(57, 207, 5),
+(58, 208, 5),
+(59, 209, 5),
+(60, 210, 5);
+
+-- INSERCIONES PELEAR
+INSERT INTO Pelear (IdPersona, IdPelea) VALUES
+-- Edición 1
+(151, 1), (152, 1),
+(153, 2), (154, 2),
+(155, 3), (156, 3),
+(157, 4), (158, 4),
+(159, 5), (160, 5),
+(161, 6), (162, 6),
+(163, 7), (164, 7),
+(165, 8), (166, 8),
+(167, 9), (168, 9),
+(169, 10), (170, 10),
+
+-- Edición 2
+(161, 11), (162, 11),
+(163, 12), (164, 12),
+(165, 13), (166, 13),
+(167, 14), (168, 14),
+(169, 15), (170, 15),
+(171, 16), (172, 16),
+(173, 17), (174, 17),
+(175, 18), (176, 18),
+(177, 19), (178, 19),
+(179, 20), (180, 20),
+
+-- Edición 3
+(171, 21), (172, 21),
+(173, 22), (174, 22),
+(175, 23), (176, 23),
+(177, 24), (178, 24),
+(179, 25), (180, 25),
+(181, 26), (182, 26),
+(183, 27), (184, 27),
+(185, 28), (186, 28),
+(187, 29), (188, 29),
+(189, 30), (190, 30),
+
+-- Edición 4
+(181, 31), (182, 31),
+(183, 32), (184, 32),
+(185, 33), (186, 33),
+(187, 34), (188, 34),
+(189, 35), (190, 35),
+(191, 36), (192, 36),
+(193, 37), (194, 37),
+(195, 38), (196, 38),
+(197, 39), (198, 39),
+(199, 40), (200, 40),
+
+-- Edición 5
+(191, 41), (192, 41),
+(193, 42), (194, 42),
+(195, 43), (196, 43),
+(197, 44), (198, 44),
+(199, 45), (200, 45),
+(201, 46), (202, 46),
+(203, 47), (204, 47),
+(205, 48), (206, 48),
+(207, 49), (208, 49),
+(209, 50), (210, 50);
+
+-- INSERCIONES TORNEO DE CAPTURA (IdTorneo = 101)
+insert into CapturaShiny (IdTorneo) values (101);
+insert into Recorrido (IdTorneo) values (101);
+
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (211, 101, 'Biblioteca', 2.5, '10:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (211, 101, 'Estadio', 1.3, '11:30:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (211, 101, 'Cafeteria', 0.5, '14:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (212, 101, 'Gimnasio', 5.1, '12:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (212, 101, 'Rectoria', 1.5, '14:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (212, 101, 'Islas', 0.3, '16:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (213, 101, 'Rectoria', 1.2, '09:30:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (213, 101, 'Biblioteca', 2.1, '11:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (213, 101, 'Gimnasio', 0.9, '15:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (215, 101, 'Gimnasio', 3.0, '10:15:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (215, 101, 'Estadio', 1.8, '13:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (220, 101, 'Cafeteria', 0.8, '12:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (220, 101, 'Tienda', 0.4, '12:30:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (225, 101, 'Tienda', 0.2, '14:30:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (225, 101, 'Gimnasio', 2.2, '15:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (240, 101, 'Biblioteca', 1.5, '16:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (240, 101, 'Rectoria', 1.1, '18:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Estadio', 4.5, '11:45:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Cafeteria', 0.7, '17:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Rectoria', 1.1, '10:45:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Biblioteca', 1.9, '13:45:00');
+
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (211, 94, 101, '2025-10-17 10:15:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (211, 111, 101, '2025-10-17 14:15:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (211, 150, 101, '2025-10-17 15:15:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (212, 37, 101, '2025-10-17 16:15:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (213, 3, 101, '2025-10-17 14:30:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (215, 13, 101, '2025-10-17 15:00:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (220, 20, 101, '2025-10-17 16:45:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (225, 30, 101, '2025-10-17 17:10:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (240, 40, 101, '2025-10-17 18:00:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (260, 50, 101, '2025-10-17 14:05:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (280, 60, 101, '2025-10-17 15:55:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (290, 77, 101, '2025-10-17 16:20:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (300, 88, 101, '2025-10-17 17:30:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (299, 97, 101, '2025-10-17 18:50:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (213, 116, 101, '2025-10-17 14:50:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (215, 126, 101, '2025-10-17 15:20:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (213, 6, 101, '2025-10-17 10:30:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (215, 7, 101, '2025-10-17 15:10:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (220, 15, 101, '2025-10-17 11:00:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (225, 8, 101, '2025-10-17 19:30:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (240, 25, 101, '2025-10-17 16:05:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (260, 26, 101, '2025-10-17 16:15:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (280, 92, 101, '2025-10-17 09:50:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (290, 42, 101, '2025-10-17 14:40:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (300, 100, 101, '2025-10-17 11:20:00');
+insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (299, 115, 101, '2025-10-17 17:00:00');
+
+-- Participaciones en torneos de tipo pelea (IdTorneo del 1 al 5)
+INSERT INTO Participar (IdPersona, IdTorneo) VALUES
+(151, 1), (152, 1), (153, 1), (154, 1), (155, 1), (156, 1), (157, 1), (158, 1), (159, 1), (160, 1),
+(161, 2), (162, 2), (163, 2), (164, 2), (165, 2), (166, 2), (167, 2), (168, 2), (169, 2), (170, 2),
+(171, 3), (172, 3), (173, 3), (174, 3), (175, 3), (176, 3), (177, 3), (178, 3), (179, 3), (180, 3),
+(181, 4), (182, 4), (183, 4), (184, 4), (185, 4), (186, 4), (187, 4), (188, 4), (189, 4), (190, 4),
+(191, 5), (192, 5), (193, 5), (194, 5), (195, 5), (196, 5), (197, 5), (198, 5), (199, 5), (200, 5),
+(201, 5), (202, 5), (203, 5), (204, 5), (205, 5), (206, 5), (207, 5), (208, 5), (209, 5), (210, 5);
+
+-- Participaciones en el torneo de tipo recorrido (IdTorneo = 6)
+INSERT INTO Participar (IdPersona, IdTorneo) VALUES
+(211, 101), (212, 101), (213, 101), (215, 101), (220, 101), (225, 101), (240, 101), (260, 101), (280, 101);
