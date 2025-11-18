@@ -1603,3 +1603,103 @@ INSERT INTO Participar (IdPersona, IdTorneo) VALUES
 -- Participaciones en el torneo de tipo recorrido (IdTorneo = 6)
 INSERT INTO Participar (IdPersona, IdTorneo) VALUES
 (211, 101), (212, 101), (213, 101), (215, 101), (220, 101), (225, 101), (240, 101), (260, 101), (280, 101);
+
+
+
+-- Consulta 4
+-- Ediciones de torneo 
+INSERT INTO EdicionTorneo (IdEdicion, NumeroEdicion, FechaEvento, Nota)
+VALUES
+    (900, 1, '2025-11-15', 'Edición especial Captura Shiny'),
+    (901, 1, '2025-11-16', 'Edición especial Distancia Recorrida');
+
+-- Torneos
+INSERT INTO Torneo (IdTorneo, IdEdicion, Inicio, Final)
+VALUES
+    (9001, 900, '14:00:00', '18:00:00'), -- Captura de Shiny
+    (9002, 901, '09:00:00', '13:00:00'); -- Distancia recorrida
+
+-- Marcamos qué torneo es de qué tipo
+INSERT INTO CapturaShiny (IdTorneo) VALUES (9001);
+INSERT INTO Recorrido   (IdTorneo)   VALUES (9002);
+
+-- Personas
+INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
+VALUES
+    (1001, 'Ana',    'Lopez',  'Gomez',   '2000-05-10', 'F'),
+    (1002, 'Bruno',  'Martinez','Rojas',  '1999-03-21', 'M'),
+    (1003, 'Carla',  'Hernandez','Perez', '2001-11-02', 'F'),
+    (1004, 'Diego',  'Ramirez','Lopez',   '1998-07-15', 'M'),
+    (1005, 'Elena',  'Santos', 'Diaz',    '2000-01-30', 'F');
+
+-- Participantes 
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (1001, '100000001', 'Ciencias', 'Matemáticas'),
+    (1002, '100000002', 'Ciencias', 'Actuaría'),
+    (1003, '100000003', 'Ciencias', 'C. Computación'),
+    (1004, '100000004', 'Ciencias', 'Física'),
+    (1005, '100000005', 'Ciencias', 'Biología');
+
+-- Inscribirlos en el torneo de Captura de Shiny (IdTorneo = 9001)
+INSERT INTO Participar (IdPersona, IdTorneo)
+VALUES
+    (1001, 9001),
+    (1002, 9001),
+    (1003, 9001),
+    (1004, 9001),
+    (1005, 9001);
+
+
+--CONSULTA 7 
+
+-- Personas que serán vendedores (201 y 202)
+INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
+VALUES
+    (201, 'Victor', 'Lopez', 'Cruz', '1995-06-01', 'M'),
+    (202, 'Wendy',  'Ramirez', 'Flores', '1996-08-20', 'F');
+
+-- Empleados 
+INSERT INTO Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior)
+VALUES
+    (201, 'E201', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 123, NULL),
+    (202, 'E202', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 124, NULL);
+
+-- Vendedores 
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (201, 0, 'Zona A'),
+    (202, 0, 'Zona B');
+
+-- Como Venta.IdPersonaV → Participante.IdPersona
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (201, '200000001', 'Ciencias', 'C. Computación'),
+    (202, '200000002', 'Ciencias', 'Actuaría');
+
+-- Alimentos
+INSERT INTO Alimento (IdAlimento, Nombre, FechaCaducidad, Perecedero, PrecioSinIVA)
+VALUES
+    (5001, 'Agua Embotellada', '2026-01-01', FALSE, 10.00),
+    (5002, 'Refresco Lata',    '2026-01-01', FALSE, 15.00),
+    (5003, 'Papas Fritas',     '2026-01-01', FALSE, 18.00),
+    (5004, 'Sandwich',         '2026-01-01', FALSE, 25.00),
+    (5005, 'Galletas',         '2026-01-01', FALSE, 12.00);
+
+-- Ventas
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7001, 1001, 201, NULL, 'Efectivo',   '2025-11-10 12:00:00+00', 10.00),
+    (7002, 1002, 201, NULL, 'Tarjeta',    '2025-11-10 12:05:00+00', 15.00),
+    (7003, 1003, 201, NULL, 'Efectivo',   '2025-11-10 12:10:00+00', 18.00),
+    (7004, 1004, 202, NULL, 'Transferencia','2025-11-10 12:15:00+00', 25.00),
+    (7005, 1005, 202, NULL, 'Efectivo',   '2025-11-10 12:20:00+00', 12.00);
+
+-- Registrar: cada venta con un alimento distinto
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (5001, 7001),
+    (5002, 7002),
+    (5003, 7003),
+    (5004, 7004),
+    (5005, 7005);
