@@ -650,99 +650,6 @@ COMMENT ON CONSTRAINT cuenta_fkey ON Cuenta IS
 
 
 
-CREATE TABLE Venta (
-    IdVenta      BIGINT,
-    IdPersona    BIGINT,
-    IdPersonaV   BIGINT,
-    IdEspectador BIGINT,
-    TipoPago     VARCHAR(50),
-    FechaHora    TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    TotalSinIva  MONEY
-);
-
--- Restricciones Venta (Dominio)
-ALTER TABLE Venta ADD CONSTRAINT venta_d1 CHECK (TipoPago <> '');
-ALTER TABLE Venta ADD CONSTRAINT venta_d2 CHECK (TipoPago IN ('Efectivo','Tarjeta','Transferencia','Otro'));
-ALTER TABLE Venta ADD CONSTRAINT venta_d3 CHECK (TotalSinIva IS NULL OR TotalSinIva > 0::money);
-ALTER TABLE Venta ADD CONSTRAINT venta_d4 CHECK (FechaHora <= NOW());
-
--- exactamente 1 de {IdPersona, IdEspectador} debe venir informado
-ALTER TABLE Venta ADD CONSTRAINT venta_destinatario_chk
-  CHECK ((IdPersona IS NOT NULL AND IdEspectador IS NULL) OR
-         (IdPersona IS NULL AND IdEspectador IS NOT NULL));
-
--- Entidad
-ALTER TABLE Venta ADD CONSTRAINT venta_pkey PRIMARY KEY (IdVenta);
-
--- Referencias
-ALTER TABLE Venta ADD CONSTRAINT venta_fkey_idpersona
-  FOREIGN KEY (IdPersona)  REFERENCES Participante (IdPersona)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE Venta ADD CONSTRAINT venta_fkey_idpersonav
-  FOREIGN KEY (IdPersonaV) REFERENCES Participante (IdPersona)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE Venta ADD CONSTRAINT venta_fkey_espectador
-  FOREIGN KEY (IdEspectador) REFERENCES Espectador (IdEspectador)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-
-
--- Tabla
-COMMENT ON TABLE Venta IS
-'Ventas: vincula participantes o espectadores con método de pago, fecha/hora y total sin IVA.';
-
--- Columnas
-COMMENT ON COLUMN Venta.IdVenta IS
-'Identificador único de la venta (BIGINT, PK).';
-
-COMMENT ON COLUMN Venta.IdPersona IS
-'Participante asociado a la venta; mutuamente excluyente con IdEspectador (ver CHECK venta_destinatario_chk).';
-
-COMMENT ON COLUMN Venta.IdPersonaV IS
-'Participante que registra/realiza la venta (vendedor/atendiente); FK a Participante(IdPersona).';
-
-COMMENT ON COLUMN Venta.IdEspectador IS
-'Espectador asociado a la venta; mutuamente excluyente con IdPersona (ver CHECK venta_destinatario_chk).';
-
-COMMENT ON COLUMN Venta.TipoPago IS
-'Método de pago; validado contra {Efectivo, Tarjeta, Transferencia, Otro}.';
-
-COMMENT ON COLUMN Venta.FechaHora IS
-'Marca de tiempo de la venta (TIMESTAMPTZ); DEFAULT CURRENT_TIMESTAMP y no puede ser futura (CHECK d4).';
-
-COMMENT ON COLUMN Venta.TotalSinIva IS
-'Importe sin IVA en MONEY; NULL permitido, si no es NULL debe ser > 0.';
-
--- Constraints (integridad)
-COMMENT ON CONSTRAINT venta_d1 ON Venta IS
-'CHECK: TipoPago <> '''' (no permite cadena vacía).';
-
-COMMENT ON CONSTRAINT venta_d2 ON Venta IS
-'CHECK: TipoPago ∈ {''Efectivo'', ''Tarjeta'', ''Transferencia'', ''Otro''}.';
-
-COMMENT ON CONSTRAINT venta_d3 ON Venta IS
-'CHECK: TotalSinIva IS NULL OR TotalSinIva > 0::money (importe positivo cuando se informa).';
-
-COMMENT ON CONSTRAINT venta_d4 ON Venta IS
-'CHECK: FechaHora <= NOW() (impide fechas/horas futuras).';
-
-COMMENT ON CONSTRAINT venta_destinatario_chk ON Venta IS
-'CHECK: exactamente uno informado entre IdPersona y IdEspectador (XOR).';
-
-COMMENT ON CONSTRAINT venta_pkey ON Venta IS
-'Llave primaria de Venta (IdVenta).';
-
-COMMENT ON CONSTRAINT venta_fkey_idpersona ON Venta IS
-'FK: Venta.IdPersona → Participante(IdPersona); con políticas en cascada (CASCADE).';
-
-COMMENT ON CONSTRAINT venta_fkey_idpersonav ON Venta IS
-'FK: Venta.IdPersonaV → Participante(IdPersona); con políticas en cascada (CASCADE).';
-
-COMMENT ON CONSTRAINT venta_fkey_espectador ON Venta IS
-'FK: Venta.IdEspectador → Espectador(IdEspectador); con políticas en cascada (CASCADE).';
-
-
-
-
 -- Telefono
 CREATE TABLE Telefono (
     IdPersona BIGINT,
@@ -1105,6 +1012,100 @@ COMMENT ON CONSTRAINT limpiador_pkey ON Limpiador IS
 
 COMMENT ON CONSTRAINT limpiador_fkey ON Limpiador IS
 'FK: Limpiador.IdPersona → Empleado(IdPersona); sin políticas explícitas (es NO ACTION).';
+
+
+
+
+
+CREATE TABLE Venta (
+    IdVenta      BIGINT,
+    IdPersona    BIGINT,
+    IdPersonaV   BIGINT,
+    IdEspectador BIGINT,
+    TipoPago     VARCHAR(50),
+    FechaHora    TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    TotalSinIva  MONEY
+);
+
+-- Restricciones Venta (Dominio)
+ALTER TABLE Venta ADD CONSTRAINT venta_d1 CHECK (TipoPago <> '');
+ALTER TABLE Venta ADD CONSTRAINT venta_d2 CHECK (TipoPago IN ('Efectivo','Tarjeta','Transferencia','Otro'));
+ALTER TABLE Venta ADD CONSTRAINT venta_d3 CHECK (TotalSinIva IS NULL OR TotalSinIva > 0::money);
+ALTER TABLE Venta ADD CONSTRAINT venta_d4 CHECK (FechaHora <= NOW());
+
+-- exactamente 1 de {IdPersona, IdEspectador} debe venir informado
+ALTER TABLE Venta ADD CONSTRAINT venta_destinatario_chk
+  CHECK ((IdPersona IS NOT NULL AND IdEspectador IS NULL) OR
+         (IdPersona IS NULL AND IdEspectador IS NOT NULL));
+
+-- Entidad
+ALTER TABLE Venta ADD CONSTRAINT venta_pkey PRIMARY KEY (IdVenta);
+
+-- Referencias
+ALTER TABLE Venta ADD CONSTRAINT venta_fkey_idpersona
+  FOREIGN KEY (IdPersona)  REFERENCES Persona (IdPersona)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Venta ADD CONSTRAINT venta_fkey_idpersonav
+  FOREIGN KEY (IdPersonaV) REFERENCES Vendedor (IdPersona)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE Venta ADD CONSTRAINT venta_fkey_espectador
+  FOREIGN KEY (IdEspectador) REFERENCES Espectador (IdEspectador)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+-- Tabla
+COMMENT ON TABLE Venta IS
+'Ventas: vincula participantes o espectadores con método de pago, fecha/hora y total sin IVA.';
+
+-- Columnas
+COMMENT ON COLUMN Venta.IdVenta IS
+'Identificador único de la venta (BIGINT, PK).';
+
+COMMENT ON COLUMN Venta.IdPersona IS
+'Participante asociado a la venta; mutuamente excluyente con IdEspectador (ver CHECK venta_destinatario_chk).';
+
+COMMENT ON COLUMN Venta.IdPersonaV IS
+'Participante que registra/realiza la venta (vendedor/atendiente); FK a Participante(IdPersona).';
+
+COMMENT ON COLUMN Venta.IdEspectador IS
+'Espectador asociado a la venta; mutuamente excluyente con IdPersona (ver CHECK venta_destinatario_chk).';
+
+COMMENT ON COLUMN Venta.TipoPago IS
+'Método de pago; validado contra {Efectivo, Tarjeta, Transferencia, Otro}.';
+
+COMMENT ON COLUMN Venta.FechaHora IS
+'Marca de tiempo de la venta (TIMESTAMPTZ); DEFAULT CURRENT_TIMESTAMP y no puede ser futura (CHECK d4).';
+
+COMMENT ON COLUMN Venta.TotalSinIva IS
+'Importe sin IVA en MONEY; NULL permitido, si no es NULL debe ser > 0.';
+
+-- Constraints (integridad)
+COMMENT ON CONSTRAINT venta_d1 ON Venta IS
+'CHECK: TipoPago <> '''' (no permite cadena vacía).';
+
+COMMENT ON CONSTRAINT venta_d2 ON Venta IS
+'CHECK: TipoPago ∈ {''Efectivo'', ''Tarjeta'', ''Transferencia'', ''Otro''}.';
+
+COMMENT ON CONSTRAINT venta_d3 ON Venta IS
+'CHECK: TotalSinIva IS NULL OR TotalSinIva > 0::money (importe positivo cuando se informa).';
+
+COMMENT ON CONSTRAINT venta_d4 ON Venta IS
+'CHECK: FechaHora <= NOW() (impide fechas/horas futuras).';
+
+COMMENT ON CONSTRAINT venta_destinatario_chk ON Venta IS
+'CHECK: exactamente uno informado entre IdPersona y IdEspectador (XOR).';
+
+COMMENT ON CONSTRAINT venta_pkey ON Venta IS
+'Llave primaria de Venta (IdVenta).';
+
+COMMENT ON CONSTRAINT venta_fkey_idpersona ON Venta IS
+'FK: Venta.IdPersona → Participante(IdPersona); con políticas en cascada (CASCADE).';
+
+COMMENT ON CONSTRAINT venta_fkey_idpersonav ON Venta IS
+'FK: Venta.IdPersonaV → Participante(IdPersona); con políticas en cascada (CASCADE).';
+
+COMMENT ON CONSTRAINT venta_fkey_espectador ON Venta IS
+'FK: Venta.IdEspectador → Espectador(IdEspectador); con políticas en cascada (CASCADE).';
 
 
 
