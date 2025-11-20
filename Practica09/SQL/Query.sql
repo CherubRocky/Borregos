@@ -1,4 +1,4 @@
-
+-- Equipo Borregos --
 -- Consulta 1
 SELECT Nombre, Paterno, Materno, CodigoEntrenador, NombreUsuario, Nivel, Equipo FROM
 Persona INNER JOIN Participante ON Persona.IdPersona = Participante.IdPersona
@@ -103,7 +103,6 @@ TotalCapturados AS (
        WHERE Shiny = true
        GROUP BY IdPersona
 )
-
 SELECT Nombre, Paterno, Materno, Facultad
 FROM Persona INNER JOIN Participante ON Persona.IdPersona = Participante.IdPersona
 INNER JOIN TotalCapturados ON TotalCapturados.IdPersona = Participante.IdPersona

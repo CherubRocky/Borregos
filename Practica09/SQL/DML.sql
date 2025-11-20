@@ -352,11 +352,11 @@ insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinI
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (198, 'Kellogs Special K Cereal', false, '2026-10-09', 2783.6);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (199, 'Chicken - Ground', false, '2026-07-16', 1318.22);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (200, 'Filter - Coffee', true, '2026-10-31', 2856.05);
-insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (201, 'Yogurt - Greek Plain', true, '2025-11-30', 134.55);
+insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (201, 'Yogurt - Greek Plain', true, '2025-12-30', 134.55);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (202, 'Cheese - Parmesan Shaved', true, '2025-11-28', 879.40);
-insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (203, 'Lettuce - Romaine', true, '2025-11-22', 215.90);
-insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (204, 'Tomatoes - Cherry', true, '2025-11-18', 642.13);
-insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (205, 'Bread - Whole Wheat', true, '2025-11-24', 1120.75);
+insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (203, 'Lettuce - Romaine', true, '2025-12-22', 215.90);
+insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (204, 'Tomatoes - Cherry', true, '2025-12-18', 642.13);
+insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (205, 'Bread - Whole Wheat', true, '2025-12-24', 1120.75);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (206, 'Chicken - Breast, Boneless', true, '2025-11-29', 1986.32);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (207, 'Milk - 2% 1L', true, '2025-12-01', 73.44);
 insert into Alimento (IdAlimento, Nombre, Perecedero, FechaCaducidad, PrecioSinIVA) values (208, 'Spinach - Baby', true, '2025-12-05', 450.67);
@@ -1558,11 +1558,11 @@ insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (2
 insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (225, 101, 'Tienda', 0.2, '14:30:00');
 insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (225, 101, 'Gimnasio', 2.2, '15:00:00');
 insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (240, 101, 'Biblioteca', 1.5, '16:00:00');
-insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (240, 101, 'Rectoria', 1.1, '18:00:00');
-insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Estadio', 4.5, '11:45:00');
-insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Cafeteria', 0.7, '17:00:00');
-insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Rectoria', 1.1, '10:45:00');
-insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Biblioteca', 1.9, '13:45:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (240, 101, 'Rectoria', 6.1, '18:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Estadio', 8.5, '11:45:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (260, 101, 'Cafeteria', 9.7, '17:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Rectoria', 11.1, '10:45:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (280, 101, 'Biblioteca', 10.9, '13:45:00');
 
 insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (211, 94, 101, '2025-10-17 10:15:00');
 insert into Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) values (211, 111, 101, '2025-10-17 14:15:00');
@@ -1630,7 +1630,8 @@ VALUES
     (1002, 'Bruno',  'Martinez','Rojas',  '1999-03-21', 'M'),
     (1003, 'Carla',  'Hernandez','Perez', '2001-11-02', 'F'),
     (1004, 'Diego',  'Ramirez','Lopez',   '1998-07-15', 'M'),
-    (1005, 'Elena',  'Santos', 'Diaz',    '2000-01-30', 'F');
+    (1005, 'Elena',  'Santos', 'Diaz',    '2000-01-30', 'F'),
+	(1006, 'Diana',  'Rayón', 'Diaz',     '2002-05-05', 'F');
 
 -- Participantes 
 INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
@@ -1639,7 +1640,8 @@ VALUES
     (1002, '100000002', 'Ciencias', 'Actuaría'),
     (1003, '100000003', 'Ciencias', 'C. Computación'),
     (1004, '100000004', 'Ciencias', 'Física'),
-    (1005, '100000005', 'Ciencias', 'Biología');
+    (1005, '100000005', 'Ciencias', 'Biología'),
+	(1006, '100000006', 'Filosofía y Letras', 'Letras Antiguas');
 
 -- Inscribirlos en el torneo de Captura de Shiny (IdTorneo = 9001)
 INSERT INTO Participar (IdPersona, IdTorneo)
@@ -1648,7 +1650,12 @@ VALUES
     (1002, 9001),
     (1003, 9001),
     (1004, 9001),
-    (1005, 9001);
+    (1005, 9001),
+	(1006, 9001);
+
+insert into Participar (IdPersona, IdTorneo)
+values
+	(1006, 9002);
 
 
 --CONSULTA 7 
@@ -1656,26 +1663,29 @@ VALUES
 -- Personas que serán vendedores (201 y 202)
 INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 VALUES
-    (201, 'Victor', 'Lopez', 'Cruz', '1995-06-01', 'M'),
-    (202, 'Wendy',  'Ramirez', 'Flores', '1996-08-20', 'F');
+    (301, 'Victor', 'Lopez', 'Cruz', '1995-06-01', 'M'),
+    (302, 'Wendy',  'Ramirez', 'Flores', '1996-08-20', 'F'),
+	(303, 'Jorge', 'Lopez', 'Cruz', '1995-06-01', 'M'),
+	(304, 'Cristian', 'Nodal', 'Macedo', '1995-06-01', 'M'),
+	(305, 'Andrés Manueln', 'Lopez', 'Obrador', '1995-06-01', 'M');
 
 -- Empleados 
 INSERT INTO Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior)
 VALUES
-    (201, 'E201', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 123, NULL),
-    (202, 'E202', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 124, NULL);
+    (301, 'E301', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 123, NULL),
+    (302, 'E302', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 124, NULL),
+	(303, 'E303', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 125, NULL),
+	(304, 'E304', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 126, NULL),
+	(305, 'E305', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 127, NULL);
 
 -- Vendedores 
 INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
 VALUES
-    (201, 0, 'Zona A'),
-    (202, 0, 'Zona B');
-
--- Como Venta.IdPersonaV → Participante.IdPersona
-INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
-VALUES
-    (201, '200000001', 'Ciencias', 'C. Computación'),
-    (202, '200000002', 'Ciencias', 'Actuaría');
+    (301, 0, 'Zona A'),
+    (302, 0, 'Zona B'),
+	(303, 0, 'Zona B'),
+	(304, 0, 'Zona C'),
+	(305, 0, 'Zona A');
 
 -- Alimentos
 INSERT INTO Alimento (IdAlimento, Nombre, FechaCaducidad, Perecedero, PrecioSinIVA)
@@ -1689,11 +1699,11 @@ VALUES
 -- Ventas
 INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
 VALUES
-    (7001, 1001, 201, NULL, 'Efectivo',   '2025-11-10 12:00:00+00', 10.00),
-    (7002, 1002, 201, NULL, 'Tarjeta',    '2025-11-10 12:05:00+00', 15.00),
-    (7003, 1003, 201, NULL, 'Efectivo',   '2025-11-10 12:10:00+00', 18.00),
-    (7004, 1004, 202, NULL, 'Transferencia','2025-11-10 12:15:00+00', 25.00),
-    (7005, 1005, 202, NULL, 'Efectivo',   '2025-11-10 12:20:00+00', 12.00);
+    (7001, 1001, 301, NULL, 'Efectivo',   '2025-11-10 12:00:00+00', 10.00),
+    (7002, 1002, 301, NULL, 'Tarjeta',    '2025-11-10 12:05:00+00', 15.00),
+    (7003, 1003, 301, NULL, 'Efectivo',   '2025-11-10 12:10:00+00', 18.00),
+    (7004, 1004, 302, NULL, 'Transferencia','2025-11-10 12:15:00+00', 25.00),
+    (7005, 1005, 302, NULL, 'Efectivo',   '2025-11-10 12:20:00+00', 12.00);
 
 -- Registrar: cada venta con un alimento distinto
 INSERT INTO Registrar (IdAlimento, IdVenta)
@@ -1764,8 +1774,8 @@ VALUES
 
 INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
 VALUES
-    (7011, 1001, 201, NULL, 'Efectivo', '2025-11-10 12:50:00+00', 1667.35),
-    (7012, 1002, 201, NULL, 'Tarjeta',  '2025-11-10 12:55:00+00', 1706.56);
+    (7011, 1001, 301, NULL, 'Efectivo', '2025-11-10 12:50:00+00', 1667.35),
+    (7012, 1002, 301, NULL, 'Tarjeta',  '2025-11-10 12:55:00+00', 1706.56);
 
 INSERT INTO Registrar (IdAlimento, IdVenta)
 VALUES
@@ -1774,9 +1784,9 @@ VALUES
  
 INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
 VALUES
-    (7013, 1003, 202, NULL, 'Efectivo',      '2025-11-10 13:00:00+00', 2128.72),
-    (7014, 1004, 202, NULL, 'Transferencia', '2025-11-10 13:05:00+00', 2717.18),
-    (7015, 1005, 202, NULL, 'Tarjeta',       '2025-11-10 13:10:00+00', 1036.97);
+    (7013, 1003, 302, NULL, 'Efectivo',      '2025-11-10 13:00:00+00', 2128.72),
+    (7014, 1004, 302, NULL, 'Transferencia', '2025-11-10 13:05:00+00', 2717.18),
+    (7015, 1005, 302, NULL, 'Tarjeta',       '2025-11-10 13:10:00+00', 1036.97);
 
 INSERT INTO Registrar (IdAlimento, IdVenta)
 VALUES
@@ -1889,3 +1899,132 @@ VALUES
     (45, 7045),  -- Bread - Calabrese Baguette
     (46, 7046),  -- Scallops - U - 10
     (47, 7047);  -- Rice Pilaf, Dry,package
+    
+-- Consulta 10 --
+INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
+VALUES
+(1007, 'Isaac',  'Escobar', 'González',    '2002-05-05', 'M'),
+(1008, 'Marco',  'Antonio', 'Solís',    '2002-05-05', 'M'),
+(1009, 'Olallo',  'Rubio', 'Maauad',    '1963-07-21', 'M'),
+(1010, 'Doroteo',  'Arango', 'Arámbula',    '2002-05-05', 'M'),
+(1011, 'Gustavo',  'Díaz', 'Ordaz',    '2002-05-05', 'M');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (1007, '100000011', 'Ciencias', 'Matemáticas'),
+    (1008, '100000012', 'Ciencias', 'Actuaría'),
+    (1009, '100000013', 'Ciencias', 'C. Computación'),
+    (1010, '100000014', 'Ciencias', 'Física'),
+    (1011, '100000015', 'Ciencias', 'Biología');
+
+insert into Participar (IdPersona, IdTorneo)
+values
+    (1007, 9002),
+    (1008, 9002),
+    (1009, 9002),
+    (1010, 9002),
+	(1011, 9002);
+
+insert into Participar (IdPersona, IdTorneo)
+values
+    (1007, 9001),
+    (1008, 9001),
+    (1009, 9001),
+    (1010, 9001),
+	(1011, 9001);
+    
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1007, 9002, 'Biblioteca', 1.0, '10:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1008, 9002, 'Biblioteca', 15.0, '10:00:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1009, 9002, 'Biblioteca', 15.0, '10:20:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1010, 9002, 'Biblioteca', 15.0, '10:30:00');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1011, 9002, 'Biblioteca', 15.0, '09:45:30');
+insert into Recorrer (IdPersona, IdTorneo, Ubicacion, Distancia, Hora) values (1006, 9002, 'Rectoría', 15.0, '09:45:30');
+
+-- cuentas --
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99991', 1007, 'Ete Sech', 4, 'Topaz Team');
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99992', 1008, 'El Pepe', 10, 'Topaz Team');
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99993', 1009, 'Mr. Graso', 10, 'SDLG');
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99994', 1010, 'Niño del Oxxo', 11, 'SDLG');
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99995', 1011, 'Pain', 15, 'Akatsuki');
+insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('99996', 1006, 'Konan', 21, 'Akatsuki');
+
+--pokemons
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (401, '99991', 'Gardevoir', 75, 'Probopass', 317.63, 'Sin género', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (402, '99991', 'Orejitas', 1, 'Gyarados', 56, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (403, '99991', 'Cachetes', 2, 'Dragonite', 58, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (404, '99991', 'Cachetes', 3, 'Dragonite', 38, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (405, '99991', 'Orejitas', 4, 'Mewtwo', 75, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (406, '99992', 'Chispitas', 5, 'Pikachu', 32, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (407, '99992', 'Bigotes', 6, 'Eevee', 46, 'Bigender', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (408, '99992', 'Pelusa', 7, 'Dragonite', 81, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (409, '99992', 'Pelusa', 8, 'Bulbasaur', 39, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (410, '99992', 'Orejitas', 9, 'Squirtle', 20, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (411, '99993', 'Bigotes', 10, 'Pikachu', 64, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (412, '99993', 'Orejitas', 11, 'Eevee', 74, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (413, '99993', 'Bigotes', 12, 'Dragonite', 26, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (414, '99993', 'Bigotes', 13, 'Dragonite', 29, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (415, '99993', 'Bigotes', 14, 'Pikachu', 85, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (416, '99994', 'Chispitas', 15, 'Jigglypuff', 28, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (417, '99994', 'Bigotes', 16, 'Jigglypuff', 41, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (418, '99994', 'Chispitas', 17, 'Charmander', 66, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (419, '99994', 'Pelusa', 18, 'Bulbasaur', 92, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (420, '99994', 'Pelusa', 19, 'Bulbasaur', 45, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (421, '99995', 'Bigotes', 20, 'Snorlax', 69, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (422, '99995', 'Orejitas', 21, 'Snorlax', 39, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (423, '99995', 'Bigotes', 22, 'Pikachu', 76, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (424, '99995', 'Cachetes', 23, 'Dragonite', 26, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (425, '99995', 'Cachetes', 24, 'Pikachu', 98, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (426, '99996', 'Chispitas', 25, 'Bulbasaur', 69, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (427, '99996', 'Pelusa', 1, 'Eevee', 87, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (428, '99996', 'Orejitas', 2, 'Gyarados', 31, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (429, '99996', 'Orejitas', 3, 'Mewtwo', 29, 'Female', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (430, '99996', 'Cachetes', 4, 'Mewtwo', 33, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (431, '99996', 'Hermano', 5, 'Snorlax', 88, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (432, '99991', 'Asmodeo', 5, 'Snorlax', 88, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (433, '99992', 'Esdras', 5, 'Magicarp', 88, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (434, '99993', 'Perpetva', 5, 'Snorlax', 88, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (435, '99994', 'Escribar', 5, 'Snorlax', 88, 'Male', true);
+insert into Pokemon (IdPokemon, CodigoEntrenador, Nombre, CombatPoints, Especie, Peso, Sexo, Shiny) values (436, '99995', 'Expósito', 5, 'Snorlax', 88, 'Male', true);
+
+-- CAPTURAS --
+
+-- CodigoEntrenador 99991 (IdPersona 1001) - IDs 401 a 405 y 432 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1007, 401, 9001, '2025-08-06 10:00:00'), (1007, 402, 9001, '2025-08-06 10:05:00'),
+(1007, 403, 9001, '2025-08-06 10:10:00'), (1007, 404, 9001, '2025-08-06 10:15:00'),
+(1007, 405, 9001, '2025-08-06 10:20:00'),
+(1007, 432, 9001, '2025-08-06 10:25:00');
+
+-- CodigoEntrenador 99992 (IdPersona 1002) - IDs 406 a 410 y 433 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1008, 406, 9001, '2025-08-06 10:30:00'), (1008, 407, 9001, '2025-08-06 10:35:00'),
+(1008, 408, 9001, '2025-08-06 10:40:00'), (1008, 409, 9001, '2025-08-06 10:45:00'),
+(1008, 410, 9001, '2025-08-06 10:50:00'),
+(1008, 433, 9001, '2025-08-06 10:55:00');
+
+-- CodigoEntrenador 99993 (IdPersona 1003) - IDs 411 a 415 y 434 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1009, 411, 9001, '2025-08-06 11:00:00'), (1009, 412, 9001, '2025-08-06 11:05:00'),
+(1009, 413, 9001, '2025-08-06 11:10:00'), (1009, 414, 9001, '2025-08-06 11:15:00'),
+(1009, 415, 9001, '2025-08-06 11:20:00'),
+(1009, 434, 9001, '2025-08-06 11:25:00');
+
+-- CodigoEntrenador 99994 (IdPersona 1004) - IDs 416 a 420 y 435 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1010, 416, 9001, '2025-08-06 11:30:00'), (1010, 417, 9001, '2025-08-06 11:35:00'),
+(1010, 418, 9001, '2025-08-06 11:40:00'), (1010, 419, 9001, '2025-08-06 11:45:00'),
+(1010, 420, 9001, '2025-08-06 11:50:00'),
+(1010, 435, 9001, '2025-08-06 11:55:00');
+
+-- CodigoEntrenador 99995 (IdPersona 1005) - IDs 421 a 425 y 436 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1011, 421, 9001, '2025-08-06 12:00:00'), (1011, 422, 9001, '2025-08-06 12:05:00'),
+(1011, 423, 9001, '2025-08-06 12:10:00'), (1011, 424, 9001, '2025-08-06 12:15:00'),
+(1011, 425, 9001, '2025-08-06 12:20:00'),
+(1011, 436, 9001, '2025-08-06 12:25:00');
+
+-- CodigoEntrenador 99996 (IdPersona 1006) - IDs 426 a 431 (Total: 6)
+INSERT INTO Capturar (IdPersona, IdPokemon, IdTorneo, FechaYHora) VALUES
+(1006, 426, 9001, '2025-08-06 12:30:00'), (1006, 427, 9001, '2025-08-06 12:35:00'),
+(1006, 428, 9001, '2025-08-06 12:40:00'), (1006, 429, 9001, '2025-08-06 12:45:00'),
+(1006, 430, 9001, '2025-08-06 12:50:00'), (1006, 431, 9001, '2025-08-06 12:55:00');
