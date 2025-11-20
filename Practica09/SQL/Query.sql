@@ -1,6 +1,23 @@
 
 -- Consulta 1
 -- Consulta 2
+SELECT 
+    per.IdPersona AS Participante,
+    per.Nombre || ' ' || per.Paterno || ' ' || per.Materno AS Participante,
+    et.NumeroEdicion AS Edicion,
+    et.FechaEvento,
+    COUNT(DISTINCT pok.IdPokemon) AS Total_Pokemons_Registrados
+FROM Participante part
+JOIN Persona per ON part.IdPersona = per.IdPersona
+JOIN Cuenta c ON c.IdPersona = part.IdPersona
+JOIN Pokemon pok ON pok.CodigoEntrenador = c.CodigoEntrenador
+JOIN Pelear pel ON pel.IdPersona = part.IdPersona
+JOIN Pelea pea ON pea.IdPelea = pel.IdPelea
+JOIN Torneo t ON t.IdTorneo = pea.IdTorneo
+JOIN EdicionTorneo et ON et.IdEdicion = t.IdEdicion
+GROUP BY per.IdPersona, per.Nombre, per.Paterno, per.Materno, et.IdEdicion, et.NumeroEdicion, et.FechaEvento
+ORDER BY et.NumeroEdicion, Total_Pokemons_Registrados DESC;
+
 -- Consulta 3
 SELECT *
 FROM Pokemon
