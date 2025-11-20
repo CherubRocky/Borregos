@@ -48,4 +48,18 @@ HAVING
     COUNT(DISTINCT Participar.IdPersona) > 5;
 
 -- Consulta 9
+SELECT
+    e.IdEmpleado,
+    per.Nombre || ' ' || per.Paterno || ' ' || per.Materno AS NombreCompleto,
+    v.Ubicacion,
+    COUNT(DISTINCT a.IdAlimento) AS Total_Alimentos_Distintos
+FROM Vendedor v
+JOIN Empleado e ON v.IdPersona = e.IdPersona
+JOIN Persona per ON e.IdPersona = per.IdPersona
+JOIN Venta ven ON ven.IdPersonaV = v.IdPersona
+JOIN Registrar r ON r.IdVenta = ven.IdVenta
+JOIN Alimento a ON a.IdAlimento = r.IdAlimento
+GROUP BY e.IdEmpleado, per.IdPersona, per.Nombre, per.Paterno, per.Materno, v.Ubicacion
+HAVING COUNT(DISTINCT a.IdAlimento) > 3
+ORDER BY Total_Alimentos_Distintos DESC;
 -- Consulta 10
