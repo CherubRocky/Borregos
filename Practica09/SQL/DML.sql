@@ -1603,3 +1603,289 @@ INSERT INTO Participar (IdPersona, IdTorneo) VALUES
 -- Participaciones en el torneo de tipo recorrido (IdTorneo = 6)
 INSERT INTO Participar (IdPersona, IdTorneo) VALUES
 (211, 101), (212, 101), (213, 101), (215, 101), (220, 101), (225, 101), (240, 101), (260, 101), (280, 101);
+
+
+
+-- Consulta 4
+-- Ediciones de torneo 
+INSERT INTO EdicionTorneo (IdEdicion, NumeroEdicion, FechaEvento, Nota)
+VALUES
+    (900, 1, '2025-11-15', 'Edición especial Captura Shiny'),
+    (901, 1, '2025-11-16', 'Edición especial Distancia Recorrida');
+
+-- Torneos
+INSERT INTO Torneo (IdTorneo, IdEdicion, Inicio, Final)
+VALUES
+    (9001, 900, '14:00:00', '18:00:00'), -- Captura de Shiny
+    (9002, 901, '09:00:00', '13:00:00'); -- Distancia recorrida
+
+-- Marcamos qué torneo es de qué tipo
+INSERT INTO CapturaShiny (IdTorneo) VALUES (9001);
+INSERT INTO Recorrido   (IdTorneo)   VALUES (9002);
+
+-- Personas
+INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
+VALUES
+    (1001, 'Ana',    'Lopez',  'Gomez',   '2000-05-10', 'F'),
+    (1002, 'Bruno',  'Martinez','Rojas',  '1999-03-21', 'M'),
+    (1003, 'Carla',  'Hernandez','Perez', '2001-11-02', 'F'),
+    (1004, 'Diego',  'Ramirez','Lopez',   '1998-07-15', 'M'),
+    (1005, 'Elena',  'Santos', 'Diaz',    '2000-01-30', 'F');
+
+-- Participantes 
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (1001, '100000001', 'Ciencias', 'Matemáticas'),
+    (1002, '100000002', 'Ciencias', 'Actuaría'),
+    (1003, '100000003', 'Ciencias', 'C. Computación'),
+    (1004, '100000004', 'Ciencias', 'Física'),
+    (1005, '100000005', 'Ciencias', 'Biología');
+
+-- Inscribirlos en el torneo de Captura de Shiny (IdTorneo = 9001)
+INSERT INTO Participar (IdPersona, IdTorneo)
+VALUES
+    (1001, 9001),
+    (1002, 9001),
+    (1003, 9001),
+    (1004, 9001),
+    (1005, 9001);
+
+
+--CONSULTA 7 
+
+-- Personas que serán vendedores (201 y 202)
+INSERT INTO Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
+VALUES
+    (201, 'Victor', 'Lopez', 'Cruz', '1995-06-01', 'M'),
+    (202, 'Wendy',  'Ramirez', 'Flores', '1996-08-20', 'F');
+
+-- Empleados 
+INSERT INTO Empleado (IdPersona, IdEmpleado, Ciudad, Calle, Colonia, CP, NoExterior, NoInterior)
+VALUES
+    (201, 'E201', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 123, NULL),
+    (202, 'E202', 'CDMX', 'Av. Universidad', 'Copilco', 45000, 124, NULL);
+
+-- Vendedores 
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (201, 0, 'Zona A'),
+    (202, 0, 'Zona B');
+
+-- Como Venta.IdPersonaV → Participante.IdPersona
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (201, '200000001', 'Ciencias', 'C. Computación'),
+    (202, '200000002', 'Ciencias', 'Actuaría');
+
+-- Alimentos
+INSERT INTO Alimento (IdAlimento, Nombre, FechaCaducidad, Perecedero, PrecioSinIVA)
+VALUES
+    (5001, 'Agua Embotellada', '2026-01-01', FALSE, 10.00),
+    (5002, 'Refresco Lata',    '2026-01-01', FALSE, 15.00),
+    (5003, 'Papas Fritas',     '2026-01-01', FALSE, 18.00),
+    (5004, 'Sandwich',         '2026-01-01', FALSE, 25.00),
+    (5005, 'Galletas',         '2026-01-01', FALSE, 12.00);
+
+-- Ventas
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7001, 1001, 201, NULL, 'Efectivo',   '2025-11-10 12:00:00+00', 10.00),
+    (7002, 1002, 201, NULL, 'Tarjeta',    '2025-11-10 12:05:00+00', 15.00),
+    (7003, 1003, 201, NULL, 'Efectivo',   '2025-11-10 12:10:00+00', 18.00),
+    (7004, 1004, 202, NULL, 'Transferencia','2025-11-10 12:15:00+00', 25.00),
+    (7005, 1005, 202, NULL, 'Efectivo',   '2025-11-10 12:20:00+00', 12.00);
+
+-- Registrar: cada venta con un alimento distinto
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (5001, 7001),
+    (5002, 7002),
+    (5003, 7003),
+    (5004, 7004),
+    (5005, 7005);
+
+--consulta 9
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (10, 0, 'Zona C');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (10, '300000010', 'Ciencias', 'Física');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (20, 0, 'Zona D');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (20, '300000020', 'Ciencias', 'Matemáticas');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (30, 0, 'Zona E');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (30, '300000030', 'Ciencias', 'Biología');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (40, 0, 'Zona F');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (40, '300000040', 'Ciencias', 'Actuaría');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (50, 0, 'Zona G');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (50, '300000050', 'Ciencias', 'C. Computación');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (60, 0, 'Zona H');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (60, '300000060', 'Ciencias', 'Matemáticas');
+
+INSERT INTO Vendedor (IdPersona, Ventas, Ubicacion)
+VALUES
+    (70, 0, 'Zona I');
+
+INSERT INTO Participante (IdPersona, NoCuenta, Facultad, Carrera)
+VALUES
+    (70, '300000070', 'Ciencias', 'Física');
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7011, 1001, 201, NULL, 'Efectivo', '2025-11-10 12:50:00+00', 1667.35),
+    (7012, 1002, 201, NULL, 'Tarjeta',  '2025-11-10 12:55:00+00', 1706.56);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (11, 7011),  -- V8 Splash Strawberry Kiwi
+    (12, 7012);  -- Bread Crumbs - Panko
+ 
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7013, 1003, 202, NULL, 'Efectivo',      '2025-11-10 13:00:00+00', 2128.72),
+    (7014, 1004, 202, NULL, 'Transferencia', '2025-11-10 13:05:00+00', 2717.18),
+    (7015, 1005, 202, NULL, 'Tarjeta',       '2025-11-10 13:10:00+00', 1036.97);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (13, 7013),  -- Grapes - Green
+    (14, 7014),  -- Squid - Tubes
+    (15, 7015);  -- Bamboo Shoots - Sliced
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7016, 1001, 10, NULL, 'Efectivo', '2025-11-10 13:15:00+00', 2930.03),
+    (7017, 1002, 10, NULL, 'Tarjeta',  '2025-11-10 13:20:00+00', 2903.00),
+    (7018, 1003, 10, NULL, 'Efectivo', '2025-11-10 13:25:00+00', 966.47),
+    (7019, 1004, 10, NULL, 'Tarjeta',  '2025-11-10 13:30:00+00', 976.95),
+    (7020, 1005, 10, NULL, 'Efectivo', '2025-11-10 13:35:00+00', 922.43);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (16, 7016),  -- Cod - Black Whole Fillet
+    (17, 7017),  -- Wild Boar - Tenderloin
+    (18, 7018),  -- Crackers - Melba Toast
+    (19, 7019),  -- Jack Daniels
+    (20, 7020);  -- Wine - Champagne Brut Veuve
+ 
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7021, 1001, 20, NULL, 'Transferencia', '2025-11-10 13:40:00+00', 361.60),
+    (7022, 1002, 20, NULL, 'Efectivo',      '2025-11-10 13:45:00+00', 1568.93),
+    (7023, 1003, 20, NULL, 'Tarjeta',       '2025-11-10 13:50:00+00', 430.41),
+    (7024, 1004, 20, NULL, 'Efectivo',      '2025-11-10 13:55:00+00', 1585.66);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (21, 7021),  -- Basil - Seedlings Cookstown
+    (22, 7022),  -- Crackers - Trio
+    (23, 7023),  -- Pastry - Baked Cinnamon Stick
+    (24, 7024);  -- Soup V8 Roasted Red Pepper
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7025, 1005, 30, NULL, 'Efectivo',      '2025-11-10 14:00:00+00', 2155.26),
+    (7026, 1001, 30, NULL, 'Tarjeta',       '2025-11-10 14:05:00+00', 2985.03),
+    (7027, 1002, 30, NULL, 'Transferencia', '2025-11-10 14:10:00+00', 2803.37),
+    (7028, 1003, 30, NULL, 'Efectivo',      '2025-11-10 14:15:00+00', 302.25),
+    (7029, 1004, 30, NULL, 'Tarjeta',       '2025-11-10 14:20:00+00', 2042.46);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (25, 7025),  -- Table Cloth 62x114 Colour
+    (26, 7026),  -- Veal - Provimi Inside
+    (27, 7027),  -- Nut - Hazelnut, Whole
+    (28, 7028),  -- Croissant, Raw - Mini
+    (29, 7029);  -- Chicken - Tenderloin
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7030, 1005, 40, NULL, 'Efectivo', '2025-11-10 14:25:00+00', 2181.06),
+    (7031, 1001, 40, NULL, 'Tarjeta',  '2025-11-10 14:30:00+00', 1493.58),
+    (7032, 1002, 40, NULL, 'Efectivo', '2025-11-10 14:35:00+00', 1217.41),
+    (7033, 1003, 40, NULL, 'Tarjeta',  '2025-11-10 14:40:00+00', 2601.85);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (30, 7030),  -- Pastry - Choclate Baked
+    (31, 7031),  -- Chick Peas - Canned
+    (32, 7032),  -- Nestea - Iced Tea
+    (33, 7033);  -- Cheese - Brick With Onion
+ 
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7034, 1004, 50, NULL, 'Transferencia', '2025-11-10 14:45:00+00', 1386.45),
+    (7035, 1005, 50, NULL, 'Efectivo',      '2025-11-10 14:50:00+00', 1768.68),
+    (7036, 1001, 50, NULL, 'Tarjeta',       '2025-11-10 14:55:00+00', 1040.91),
+    (7037, 1002, 50, NULL, 'Efectivo',      '2025-11-10 15:00:00+00', 1625.50),
+    (7038, 1003, 50, NULL, 'Tarjeta',       '2025-11-10 15:05:00+00', 1661.67);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (34, 7034),  -- Red Pepper Paste
+    (35, 7035),  -- Flavouring - Raspberry
+    (36, 7036),  -- Oil - Pumpkinseed
+    (37, 7037),  -- Rice - Long Grain
+    (38, 7038);  -- Wine - Piper Heidsieck Brut
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7039, 1004, 60, NULL, 'Efectivo',      '2025-11-10 15:10:00+00', 1579.92),
+    (7040, 1005, 60, NULL, 'Tarjeta',       '2025-11-10 15:15:00+00', 1581.22),
+    (7041, 1001, 60, NULL, 'Transferencia', '2025-11-10 15:20:00+00', 1101.10),
+    (7042, 1002, 60, NULL, 'Efectivo',      '2025-11-10 15:25:00+00', 2720.60);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (39, 7039),  -- Sea Urchin
+    (40, 7040),  -- Ham - Virginia
+    (41, 7041),  -- Rhubarb
+    (42, 7042);  -- Pepper - Black, Whole
+
+INSERT INTO Venta (IdVenta, IdPersona, IdPersonaV, IdEspectador, TipoPago, FechaHora, TotalSinIva)
+VALUES
+    (7043, 1003, 70, NULL, 'Tarjeta',       '2025-11-10 15:30:00+00', 744.98),
+    (7044, 1004, 70, NULL, 'Efectivo',      '2025-11-10 15:35:00+00', 2602.67),
+    (7045, 1005, 70, NULL, 'Transferencia', '2025-11-10 15:40:00+00', 60.14),
+    (7046, 1001, 70, NULL, 'Efectivo',      '2025-11-10 15:45:00+00', 2024.52),
+    (7047, 1002, 70, NULL, 'Tarjeta',       '2025-11-10 15:50:00+00', 983.35);
+
+INSERT INTO Registrar (IdAlimento, IdVenta)
+VALUES
+    (43, 7043),  -- Pepper - Cayenne
+    (44, 7044),  -- Roe - Lump Fish, Black
+    (45, 7045),  -- Bread - Calabrese Baguette
+    (46, 7046),  -- Scallops - U - 10
+    (47, 7047);  -- Rice Pilaf, Dry,package
