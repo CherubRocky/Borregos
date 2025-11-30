@@ -1551,3 +1551,50 @@ ALTER TABLE Recorrer ADD CONSTRAINT recorrer_fkey_persona
   ALTER TABLE PARTICIPANTE ADD CONSTRAINT participante_fkey_persona 
     FOREIGN KEY (IdPersona) REFERENCES Persona (IdPersona) 
     ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+-- CAMBIOS AL MODELO (EQUIPAR) --
+CREATE TABLE Equipar (
+  IdPersona BIGINT,
+  IdTorneo BIGINT,
+  IdPokemon INTEGER
+);
+
+  -- Restricciones referenciales --
+  ALTER TABLE Equipar ADD CONSTRAINT equipar_fkey_participante
+  FOREIGN KEY (IdPersona) REFERENCES Participante (IdPersona)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+
+  ALTER TABLE Equipar ADD CONSTRAINT equipar_fkey_torneo
+  FOREIGN KEY (IdTorneo) REFERENCES Enfrentamiento (IdTorneo)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+
+  ALTER TABLE Equipar ADD CONSTRAINT equipar_fkey_pokemon
+  FOREIGN KEY (IdPokemon) REFERENCES Pokemon (IdPokemon)
+  ON DELETE CASCADE ON UPDATE CASCADE;
+
+  -- COMENTARIOS --
+
+  -- Tabla
+  COMMENT ON TABLE Equipar IS
+  'Los pokémones que cada participante lleva al torneo de peleas.';
+
+  -- Columnas
+  COMMENT ON COLUMN Equipar.IdPersona IS
+  'Identificador de la persona participante (BIGINT); llave foránea.';
+
+  COMMENT ON COLUMN Equipar.IdTorneo IS
+  'Identificador del torneo de peleas (BIGINT); llave foránea.';
+
+  COMMENT ON COLUMN Equipar.IdPokemon IS
+  'Identificador del pokemon usado en el torneo (INTEGER); llave foránea.';
+
+  -- Constraints
+  COMMENT ON CONSTRAINT equipar_fkey_participante ON Equipar IS
+  'Llave primaria del Participante que registra los pokemones (IdPersona).';
+
+  COMMENT ON CONSTRAINT equipar_fkey_torneo ON Equipar IS
+  'Llave primaria del torneo de Enfrentamiento (IdTorneo).';
+
+  COMMENT ON CONSTRAINT equipar_fkey_pokemon ON Equipar IS
+  'Llave primaria del Pokemon inscrito (IdPokemon).';
