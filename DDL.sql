@@ -229,17 +229,17 @@ CREATE TABLE Cuenta (
     CodigoEntrenador CHAR(5),
     IdPersona        BIGINT,
     NombreUsuario    VARCHAR(50),
-    Nivel            VARCHAR(10),
+    Nivel            INTEGER,
     Equipo           VARCHAR(30)
 );
 
 -- Restricciones Cuenta (Dominio)
-ALTER TABLE Cuenta ALTER COLUMN Nivel SET DEFAULT '1';
+ALTER TABLE Cuenta ALTER COLUMN Nivel SET DEFAULT 1;
+ALTER TABLE Cuenta ALTER COLUMN Nivel SET NOT NULL;
 ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d1 CHECK (CHAR_LENGTH(CodigoEntrenador) = 5);
 ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d2 CHECK (IdPersona > 0);
 ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d3 CHECK (NombreUsuario <> '');
-ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d4 CHECK (Nivel <> '');
-ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d5 CHECK (Equipo <> '');
+ALTER TABLE Cuenta ADD CONSTRAINT cuenta_d4 CHECK (Equipo <> '');
 
 -- Entidad
 ALTER TABLE Cuenta ADD CONSTRAINT cuenta_pkey PRIMARY KEY (CodigoEntrenador);
@@ -261,10 +261,10 @@ COMMENT ON COLUMN Cuenta.NombreUsuario IS
 'Nombre de usuario; se valida que no sea cadena vacía (CHECK d3).';
 
 COMMENT ON COLUMN Cuenta.Nivel IS
-'Nivel de la cuenta; por defecto ''1'' y no vacío (CHECK d4).';
+'Nivel de la cuenta; por defecto 1 y no vacío.';
 
 COMMENT ON COLUMN Cuenta.Equipo IS
-'Equipo del jugador; se valida que no sea cadena vacía (CHECK d5).';
+'Equipo del jugador; se valida que no sea cadena vacía (CHECK d4).';
 
 -- Constraints (integridad)
 COMMENT ON CONSTRAINT cuenta_d1 ON Cuenta IS
@@ -277,9 +277,6 @@ COMMENT ON CONSTRAINT cuenta_d3 ON Cuenta IS
 'CHECK: NombreUsuario <> '''' (no permite cadena vacía).';
 
 COMMENT ON CONSTRAINT cuenta_d4 ON Cuenta IS
-'CHECK: Nivel <> '''' (no permite cadena vacía).';
-
-COMMENT ON CONSTRAINT cuenta_d5 ON Cuenta IS
 'CHECK: Equipo <> '''' (no permite cadena vacía).';
 
 COMMENT ON CONSTRAINT cuenta_pkey ON Cuenta IS
