@@ -1404,6 +1404,3 @@ insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) v
 insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('A5048', 4998, 'csunshineqb', 22, 'Valor');
 insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('A5049', 4999, 'ftillerqc', 67, 'Valor');
 insert into Cuenta (CodigoEntrenador, IdPersona, NombreUsuario, Nivel, Equipo) values ('A5050', 5000, 'srollinsonqd', 31, 'Místico');
-
-
-

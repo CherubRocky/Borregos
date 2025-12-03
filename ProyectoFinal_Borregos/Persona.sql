@@ -2004,7 +2004,7 @@ insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (1999, 'Ellene', 'Spering', 'Iacomini', '5/21/2008', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2000, 'Priscilla', 'Pollicote', 'Janatka', '7/14/2006', 'M');
 
---personas desde 20001 asta 3000
+--personas desde 2001 hasta 3000
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2001, 'Xylina', 'Dami', 'Vauls', '9/11/2003', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2002, 'Noella', 'Heskey', 'Pettko', '7/27/2005', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2003, 'Cthrine', 'Flemmich', 'Albion', '9/15/2003', 'F');
@@ -2013,23 +2013,23 @@ insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2006, 'Berthe', 'Castanho', 'Hoffmann', '1/7/2007', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2007, 'Care', 'Rickarsey', 'Shippam', '2/5/2008', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2008, 'Libbie', 'Velti', 'Lapsley', '6/29/2006', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2008, 'Torr', 'Giblin', 'Archibould', '10/14/2005', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2000, 'Taylor', 'Nizard', 'Jamieson', '12/4/2002', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2006, 'Nicolai', 'Rosa', 'Ludovico', '4/28/2006', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2002, 'Aguste', 'Steanyng', 'Behn', '4/7/2007', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2003, 'Elfrieda', 'Callicott', 'Clapperton', '8/17/2000', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2004, 'Wernher', 'Roscrigg', 'Belfit', '9/6/2007', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2005, 'Tallia', 'Kohring', 'Redgewell', '12/15/2005', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2006, 'Alister', 'Brisset', 'Falconar', '6/24/2004', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2007, 'Violet', 'Biesterfeld', 'Wedlock', '10/19/2002', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2008, 'Orelle', 'Culverhouse', 'Lepick', '1/28/2000', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2007, 'Ingaborg', 'Spragge', 'Filliskirk', '3/17/2005', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2000, 'Kore', 'Bosdet', 'Wortley', '1/1/2003', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2002, 'Willamina', 'Jamot', 'Tumilson', '12/22/2006', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2002, 'Britni', 'Micheu', 'Gainsford', '11/17/2003', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2003, 'Brana', 'Keuntje', 'Churms', '4/14/2000', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2003, 'Sonnnie', 'Espadero', 'Antosik', '7/13/2005', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2005, 'Ellis', 'Purnell', 'Romaines', '11/12/2003', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2009, 'Torr', 'Giblin', 'Archibould', '10/14/2005', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2010, 'Taylor', 'Nizard', 'Jamieson', '12/4/2002', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2011, 'Nicolai', 'Rosa', 'Ludovico', '4/28/2006', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2012, 'Aguste', 'Steanyng', 'Behn', '4/7/2007', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2013, 'Elfrieda', 'Callicott', 'Clapperton', '8/17/2000', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2014, 'Wernher', 'Roscrigg', 'Belfit', '9/6/2007', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2015, 'Tallia', 'Kohring', 'Redgewell', '12/15/2005', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2016, 'Alister', 'Brisset', 'Falconar', '6/24/2004', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2017, 'Violet', 'Biesterfeld', 'Wedlock', '10/19/2002', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2018, 'Orelle', 'Culverhouse', 'Lepick', '1/28/2000', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2019, 'Ingaborg', 'Spragge', 'Filliskirk', '3/17/2005', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2020, 'Kore', 'Bosdet', 'Wortley', '1/1/2003', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2021, 'Willamina', 'Jamot', 'Tumilson', '12/22/2006', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2022, 'Britni', 'Micheu', 'Gainsford', '11/17/2003', 'M');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2023, 'Brana', 'Keuntje', 'Churms', '4/14/2000', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2024, 'Sonnnie', 'Espadero', 'Antosik', '7/13/2005', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2025, 'Ellis', 'Purnell', 'Romaines', '11/12/2003', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2026, 'Shayna', 'Maffucci', 'Brunsdon', '9/3/2001', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2027, 'Chas', 'Aldington', 'Porteous', '7/31/2004', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2028, 'Dickie', 'McCulloch', 'Ygo', '5/31/2007', 'F');
@@ -2241,7 +2241,7 @@ insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2234, 'Shannan', 'Turbill', 'Ouldcott', '6/13/2004', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2235, 'Marlon', 'Challenger', 'Trahearn', '9/15/2007', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2236, 'Dean', 'Warton', 'Bore', '2/15/2004', 'F');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2237, 'Matti', 'Bolter', 'Chaddock', '12/29/2003', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2237, 'Matti', 'Bolter', 'Chaddock', '12/09/2003', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2238, 'Frances', 'Ert', 'Wardle', '12/5/2004', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2239, 'Philippine', 'Sedgeman', 'DeplacIdPersonao', '2/15/2000', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (2240, 'Sheffield', 'Caspell', 'Chattell', '6/7/2003', 'F');
@@ -3060,7 +3060,7 @@ insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo)
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3051, 'Adena', 'Butterworth', 'Whitmell', '11/6/2007', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3052, 'Nichole', 'Nel', 'Hoodless', '11/22/2003', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3053, 'Shurlocke', 'Cheake', 'Berrey', '11/7/2003', 'M');
-insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3054, 'Pen', 'Parrett', 'Hassan', '2/29/2003', 'F');
+insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3054, 'Pen', 'Parrett', 'Hassan', '2/09/2003', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3055, 'Maurine', 'Di Carlo', 'Realy', '3/10/2008', 'M');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3056, 'Iolanthe', 'Guthrie', 'LLelweln', '9/15/2002', 'F');
 insert into Persona (IdPersona, Nombre, Paterno, Materno, FechaNacimiento, Sexo) values (3057, 'Morgana', 'Richt', 'Firbank', '9/2/2003', 'F');
