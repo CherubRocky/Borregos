@@ -11,7 +11,7 @@ declare
     pokemones integer; -- Variable donde guardaremos el conteo de pokémon del participante en el torneo
 begin
     select count(*) into pokemones
-    from participante_pokemon_torneo
+    from Equipar
     where idPersona = new.idPersona
       and idTorneo = new.idTorneo;
     
@@ -30,7 +30,7 @@ $$
 language plpgsql;
 -- Trigger
 create trigger trg_check_num_pokemones
-before insert or update on participante_pokemon_torneo
+before insert or update on Equipar
 for each row
 execute function check_num_pokemones();
 
@@ -155,7 +155,7 @@ declare
 begin
     -- Verificamos que exista el pokémon antiguo asociado al participante en el torneo para poder garantizar el cambio
     select count(*) into existe_old
-    from participante_pokemon_torneo
+    from Equipar
     where idPersona = p_idpersona
       and idTorneo = p_idtorneo
       and idPokemon = p_idpokemon_old;
@@ -178,7 +178,7 @@ begin
 
     -- Por ultimo, checamos que el nuevo pokémon a asignar no esté ya registrado en el torneo
     if exists (
-        select 1 from participante_pokemon_torneo
+        select 1 from Equipar
         where idPersona = p_idpersona
           and idTorneo = p_idtorneo
           and idPokemon = p_idpokemon_new
@@ -187,12 +187,12 @@ begin
     end if;
 
     -- Una vez validados las condiciones anteriores, procedemos ahora sí a hacer el cambio correspondiente
-    delete from participante_pokemon_torneo
+    delete from Equipar
     where idPersona = p_idpersona
       and idTorneo = p_idtorneo
       and idPokemon = p_idpokemon_old;
 
-    insert into participante_pokemon_torneo (idPersona, idTorneo, idPokemon)
+    insert into Equipar (idPersona, idTorneo, idPokemon)
     values (p_idpersona, p_idtorneo, p_idpokemon_new);
 
     raise notice 'El proceso de cambio de pokémon para el participante % en el torneo % se realizó con éxito.', p_idpersona, p_idtorneo;
