@@ -1595,3 +1595,63 @@ CREATE TABLE Equipar (
 
   COMMENT ON CONSTRAINT equipar_fkey_pokemon ON Equipar IS
   'Llave primaria del Pokemon inscrito (IdPokemon).';
+
+-- Funciones para agregar los atributos derivados/calculados en las tablas Persona, Espectador, Venta y Encargado.
+-- Calcular edad de una Persona
+create or replace function calcular_edad_persona(fecha_nacimiento DATE)
+returns integer as
+$$
+begin
+    return date_part('year', age(current_date, fecha_nacimiento));
+end;
+$$
+language plpgsql;
+
+-- Calcular edad de un Espectador
+create or replace function calcular_edad_espectador(fecha_nacimiento DATE)
+returns integer as
+$$
+begin
+    return date_part('year', age(current_date, fecha_nacimiento));
+end;
+$$
+language plpgsql;
+
+-- Calcular y dar el precio final de una Venta con IVA incluido
+create or replace function calcular_iva_venta(total_sin_iva MONEY)
+returns money as
+$$
+begin
+    if total_sin_iva is null then
+        return null;
+    end if;
+    return (total_sin_iva * 0.16) + total_sin_iva;
+end;
+$$
+language plpgsql;
+
+-- Calcular el pago correspondiente a un Encargado según el número de personas que registró
+create or replace function calcular_pago_encargado(registros INT)
+returns money as
+$$
+begin 
+    return registros * 50;
+end;
+$$
+language plpgsql;
+
+-- Calcular el pago correspondiente a un Vendedor según las ganancias generadas en sus ventas.
+create or replace function calcular_pago_vendedor(id_vendedor bigint)
+returns money as
+$$
+declare
+    total_ganancia money := 0;
+begin
+    select sum((TotalSinIva * 0.16)) into total_ganancia
+    from Venta
+    where IdPersona = id_vendedor;
+
+    return total_ganancia * 0.25;
+end;
+$$
+language plpgsql;

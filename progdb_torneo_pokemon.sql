@@ -1,4 +1,7 @@
--- Disparadores para la Base de Datos del Torneo Pokémon
+----------------------------------------------------------
+-- Disparadores para la Base de Datos del Torneo Pokémon--
+----------------------------------------------------------
+
 -- Valida que un participante no cuente con más de 6 pokémon en un mismo torneo
 -- Cada participante puede tener hasta un máximo de 6 pokémon en un torneo específico pero no más.
 create or replace function check_num_pokemones()
@@ -74,7 +77,37 @@ for each row
 execute function check_participante_en_torneos();
 
 
--- Procesos almacenados para la Base de Datos del Torneo Pokémon
+------------------------------------------------------------------
+-- Procesos almacenados para la Base de Datos del Torneo Pokémon--
+------------------------------------------------------------------
+
+-- Procedimiento para mostrar a todos los participantes que están registrados y almacenados en nuestra base de datos.
+create or replace procedure mostrar_informacion_participantes() as
+$$
+declare
+    fila record;
+    i int := 1;
+begin
+    for fila in
+        select
+            Participante.IdPersona,
+            Persona.Nombre || ' ' || Persona.Paterno || ' ' || Persona.Materno as NombreCompleto,
+            Participante.NoCuenta,
+            Participante.Facultad,
+            Participante.Carrera,
+            calcular_edad_persona(Persona.FechaNacimiento) as Edad,
+            Persona.Sexo
+        from Participante
+        join Persona on Participante.IdPersona = Persona.IdPersona
+    loop
+        raise notice 'Participante %: IdPersona = % | Nombre = % | NoCuenta = % | Facultad = % | Carrera = % | Edad = % | Sexo = %',
+            i, fila.IdPersona, fila.NombreCompleto, fila.NoCuenta, fila.Facultad, fila.Carrera, fila.Edad, fila.Sexo;
+        i := i + 1;
+    end loop;
+end;
+$$
+language plpgsql;
+
 -- Procedimiento para convertir un Encargado en Participante para que pueda participar en diferentes torneos.
 create or replace procedure encargado_a_participante(
     p_idpersona bigint,
@@ -93,7 +126,7 @@ begin
     -- Primero nos aseguramos que el idPersona del Encargado exista
     select count(*) into existe from Encargado where IdPersona = p_idpersona;
     if existe = 0 then
-        raise exception 'El IdPersona % no corresponde a ningún Encargado registrado.', p_idpersona;
+        raise exception 'El IdPersona % no corresponde a ningún Encargado registrado, no fue posible la conversión a Participante.', p_idpersona;
     end if;
 
     -- Una vez que vemos que existe dicho encargado, lo insertamos ahora como un participante
@@ -103,72 +136,66 @@ begin
         p_idpersona, p_idtorneo, p_nocuenta, p_facultad, p_carrera, p_ubicacion, p_distancia, p_hora
     );
 
-    raise notice 'Encargado % convertido en participante en torneo %', p_idpersona, p_idtorneo;
+    raise notice 'Encargado % convertido en participante y será participante del torneo %', p_idpersona, p_idtorneo;
 end;
 $$
 language plpgsql;
 
--------------------------------------------
--- Aqui va otro procedimiento almacenado --
--------------------------------------------
-
-
--- Funciones para agregar los atributos derivados/calculados en las tablas Persona, Espectador, Venta y Encargado.
--- Calcular edad de una Persona
-create or replace function calcular_edad_persona(fecha_nacimiento DATE)
-returns integer as
-$$
-begin
-    return date_part('year', age(current_date, fecha_nacimiento));
-end;
-$$
-language plpgsql;
-
--- Calcular edad de un Espectador
-create or replace function calcular_edad_espectador(fecha_nacimiento DATE)
-returns integer as
-$$
-begin
-    return date_part('year', age(current_date, fecha_nacimiento));
-end;
-$$
-language plpgsql;
-
--- Calcular y dar el precio final de una Venta con IVA incluido
-create or replace function calcular_iva_venta(total_sin_iva MONEY)
-returns money as
-$$
-begin
-    if total_sin_iva is null then
-        return null;
-    end if;
-    return (total_sin_iva * 0.16) + total_sin_iva;
-end;
-$$
-language plpgsql;
-
--- Calcular el pago correspondiente a un Encargado según el número de personas que registró
-create or replace function calcular_pago_encargado(registros INT)
-returns money as
-$$
-begin 
-    return registros * 50;
-end;
-$$
-language plpgsql;
-
--- Calcular el pago correspondiente a un Vendedor según las ganancias generadas en sus ventas.
-create or replace function calcular_pago_vendedor(id_vendedor bigint)
-returns money as
+-- Procedimiento para permitir el cambio de pokémon asociado a un participante en un torneo específico.
+create or replace procedure cambiar_pokemon_participante(
+    p_idpersona bigint,
+    p_idtorneo bigint,
+    p_idpokemon_old bigint,
+    p_idpokemon_new bigint
+) as
 $$
 declare
-    total_ganancia money := 0;
+    existe_old int;
+    existe_new int;
 begin
-    select sum((TotalSinIva * 0.16)) into total_ganancia
-    from Venta
-    where IdPersona = id_vendedor;
+    -- Verificamos que exista el pokémon antiguo asociado al participante en el torneo para poder garantizar el cambio
+    select count(*) into existe_old
+    from participante_pokemon_torneo
+    where idPersona = p_idpersona
+      and idTorneo = p_idtorneo
+      and idPokemon = p_idpokemon_old;
 
-    return total_ganancia * 0.25;
+    if existe_old = 0 then
+        raise exception 'El Pokémon antiguo no existe para este participante en el torneo.';
+    end if;
+
+    -- Nos aseguramos de que el nuevo pokémon pertenezca al participante mediante su cuenta
+    select count(*) into existe_new
+    from Pokemon
+    where IdPokemon = p_idpokemon_new
+      and CodigoEntrenador = (
+          select CodigoEntrenador from Cuenta where IdPersona = p_idpersona
+      );
+
+    if existe_new = 0 then
+        raise exception 'El nuevo Pokémon no forma parte de alguna de las cuentas del participante.';
+    end if;
+
+    -- Por ultimo, checamos que el nuevo pokémon a asignar no esté ya registrado en el torneo
+    if exists (
+        select 1 from participante_pokemon_torneo
+        where idPersona = p_idpersona
+          and idTorneo = p_idtorneo
+          and idPokemon = p_idpokemon_new
+    ) then
+        raise exception 'El Pokémon que se desea asignar ya está registrado para este participante en el torneo.';
+    end if;
+
+    -- Una vez validados las condiciones anteriores, procedemos ahora sí a hacer el cambio correspondiente
+    delete from participante_pokemon_torneo
+    where idPersona = p_idpersona
+      and idTorneo = p_idtorneo
+      and idPokemon = p_idpokemon_old;
+
+    insert into participante_pokemon_torneo (idPersona, idTorneo, idPokemon)
+    values (p_idpersona, p_idtorneo, p_idpokemon_new);
+
+    raise notice 'El proceso de cambio de pokémon para el participante % en el torneo % se realizó con éxito.', p_idpersona, p_idtorneo;
 end;
 $$
 language plpgsql;
