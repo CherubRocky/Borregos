@@ -167,39 +167,12 @@ FROM Participante part
 GROUP BY per.IdPersona, per.Nombre, per.Paterno, per.Materno, et.IdEdicion, et.NumeroEdicion, et.FechaEvento
 ORDER BY et.NumeroEdicion, Total_Pokemons_Registrados DESC;
 
--- 14.- Obtener el nombre completo de los participantes y su facultad que hayan participado tanto en el torneo de distancia recorrida como en el de captura de shinys, cuya distancia total recorrida sea mayor al promedio de distancia de todos los participantes y ademas que su numero de capturas de shinys sean mayor a 5.
-
-WITH
-DistTotal AS (
-    SELECT IdPersona, SUM(Distancia) AS DistanciaTotal
-    FROM Recorrer
-    GROUP BY IdPersona
-),
-PromDistancia AS (
-    SELECT
-        AVG(DistanciaTotal) AS Promedio
-    FROM DistTotal
-),
-TotalCapturados AS (
-    SELECT
-        IdPersona,
-        COUNT(IdPersona) AS Capturados
-        FROM Capturar INNER JOIN Pokemon ON Capturar.IdPokemon = Pokemon.IdPokemon
-        WHERE Shiny = true
-        GROUP BY IdPersona
-)
-SELECT Nombre, Paterno, Materno, Facultad
-FROM Persona INNER JOIN Participante ON Persona.IdPersona = Participante.IdPersona
-            INNER JOIN TotalCapturados ON TotalCapturados.IdPersona = Participante.IdPersona
-            INNER JOIN DistTotal ON DistTotal.IdPersona = Participante.IdPersona
-WHERE TotalCapturados.Capturados > 5 AND DistTotal.DistanciaTotal > (SELECT Promedio FROM PromDistancia);
-
--- 15.- Listar los Pokémones shinys, que fueron capturados durante el evento, únicamente si fueron capturados entre las 14:00hrs y las 18:00hrs.
+-- 14.- Listar los Pokémones shinys, que fueron capturados durante el evento, únicamente si fueron capturados entre las 14:00hrs y las 18:00hrs.
 
 SELECT * FROM Pokemon INNER JOIN Capturar ON Pokemon.IdPokemon = Capturar.IdPokemon
 WHERE Pokemon.Shiny = TRUE AND CAST(Capturar.FechaYHora as TIME) BETWEEN '14:00:00' AND '18:00:00';
 
--- 16.- Obtener la lista de participantes que estén inscritos en el Torneo de Captura de Shiny y a su vez que no estén inscritos en el torneo de distancia recorrida.
+-- 15.- Obtener la lista de participantes que estén inscritos en el Torneo de Captura de Shiny y a su vez que no estén inscritos en el torneo de distancia recorrida.
 SELECT DISTINCT pa.IdPersona, per.Nombre, per.Paterno, per.Materno
 FROM Participar pa
             INNER JOIN Persona per ON pa.IdPersona = per.IdPersona
