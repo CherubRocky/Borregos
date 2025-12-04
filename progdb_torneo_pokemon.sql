@@ -41,38 +41,46 @@ create or replace function check_participante_en_torneos()
 returns trigger as
 $$
 declare
-    tipo_nuevo text; -- Variable para guardar el tipo de torneo del nuevo registro
-    ya_en_pelea boolean; -- Variable para saber si el participante ya está en un torneo de pelea
+    es_pelea_nuevo boolean;
+    ya_en_pelea boolean;
 begin
-    select t.TipoTorneo into tipo_nuevo
-    from Torneo t
-    where t.IdTorneo = new.IdTorneo;
-
-    -- Verifica si el participante ya está en un torneo de pelea (distinto al actual si es update)
+    -- Primero verificamos si el torneo nuevo es de pelea
     select exists (
-        select 1
-        from Participante p
-        join Torneo t on t.IdTorneo = p.IdTorneo
-        where p.IdPersona = new.IdPersona
-          and t.TipoTorneo = 'PELEA'
-          and (TG_OP = 'INSERT' or p.IdTorneo <> new.IdTorneo)
+        select 1 from enfrentamiento e where e.idtorneo = new.idtorneo
+    ) into es_pelea_nuevo;
+
+    -- Comprobamos si el participante ya está inscrito en algún torneo de pelea, no necesariamente el mismo
+    select exists (
+        select 1 from participar pa
+        join enfrentamiento e on e.idtorneo = pa.idtorneo
+        where pa.idpersona = new.idpersona
+          and (TG_OP = 'INSERT' or pa.idtorneo <> new.idtorneo)
     ) into ya_en_pelea;
 
-    if tipo_nuevo = 'PELEA' and ya_en_pelea then
+    -- Si ya está en un torneo de pelea, no puede inscribirse en ningún otro
+    if ya_en_pelea then
         raise exception 'Un participante en torneo de pelea no puede estar en otros torneos.';
     end if;
 
-    if tipo_nuevo <> 'PELEA' and ya_en_pelea then
-        raise exception 'Un participante en torneo de pelea no puede estar en otros torneos.';
+    -- Si el torneo nuevo es de pelea y el participante ya está inscrito en otro torneo entonces no puede inscribirse
+    if es_pelea_nuevo then
+        if exists (
+            select 1 from participar pa
+            where pa.idpersona = new.idpersona
+              and (TG_OP = 'INSERT' or pa.idtorneo <> new.idtorneo)
+        ) then
+            raise exception 'Un participante en torneo de pelea no puede estar en otros torneos.';
+        end if;
     end if;
 
     return new;
 end;
 $$
 language plpgsql;
--- Trigger
+
+-- Trigger sobre Participar
 create trigger trg_check_participante_en_torneos
-before insert or update on Participante
+before insert or update on participar
 for each row
 execute function check_participante_en_torneos();
 
